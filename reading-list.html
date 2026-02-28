@@ -3,327 +3,392 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>reading list - nicolaj.com</title>
+<title>READING &lt;GO&gt; - nicolaj.com</title>
 <meta name="description" content="audible library rated list.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --text:#171717;
-  --bg:#f8f8f6;
-  --link-hover-bg:#000;
-  --link-hover-fg:#fff;
+  --bb-black:#000000;
+  --bb-dark:#0a0a0a;
+  --bb-panel:#111111;
+  --bb-border:#333333;
+  --bb-orange:#ff8c00;
+  --bb-amber:#ffa500;
+  --bb-yellow:#ffff00;
+  --bb-white:#e8e8e8;
+  --bb-green:#00d26a;
+  --bb-red:#ff3333;
+  --bb-blue:#4488ff;
+  --bb-gray:#666666;
+  --bb-dimgray:#444444;
 }
 
 html,body{
   min-height:100vh;
-  font-family:'Geist Mono',ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
+  font-family:Consolas,'SF Mono',Menlo,Monaco,'DejaVu Sans Mono',monospace;
   font-size:13px;
-  line-height:1.65;
-  color:var(--text);
-  background:var(--bg);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+  color:var(--bb-white);
+  background:var(--bb-black);
+  -webkit-font-smoothing:none;
 }
 
-/* noise texture overlay — replicating million.dev grain */
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.45;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat:repeat;
-  background-size:180px 180px;
-}
+::selection{background:var(--bb-orange);color:var(--bb-black)}
 
-main{
-  position:relative;
-  z-index:1;
-  max-width:70ch;
-  padding:3rem 1.5rem 6rem;
-}
-
-::selection{
-  background:#000;
-  color:#fff;
-}
-
-a{
-  color:var(--text);
-  text-decoration:underline;
-  text-underline-offset:2px;
-  transition:background .12s,color .12s;
-  -webkit-tap-highlight-color:transparent;
-}
-
-a:hover{
-  background:var(--link-hover-bg);
-  color:var(--link-hover-fg);
-  text-decoration:none;
-}
-
-a:focus-visible{
-  outline:2px solid #006aff;
-  outline-offset:2px;
-}
-
-h1{
-  font-size:13px;
-  font-weight:500;
-  margin-bottom:2px;
-}
-
-.location{
-  color:#737373;
-  font-weight:300;
-  margin-bottom:.8rem;
-}
-
-.menu{
+.bb-topbar{
+  background:#1a1a2e;
+  border-bottom:1px solid var(--bb-border);
+  padding:3px 12px;
   display:flex;
-  flex-wrap:wrap;
-  gap:.75rem;
-  margin-bottom:2rem;
-}
-
-.menu a{
-  text-decoration:none;
-  border:1px solid #d4d4d4;
-  border-radius:4px;
-  padding:1px 8px;
-}
-
-.menu a[aria-current="page"]{
-  background:#171717;
-  color:#f8f8f6;
-  border-color:#171717;
-}
-
-h2{
-  font-size:13px;
-  font-weight:500;
-  margin-top:2.2rem;
-  margin-bottom:.35rem;
-}
-
-p,ul{
-  max-width:70ch;
-}
-
-ul{
-  list-style:none;
-  padding:0;
-}
-
-ul li{
-  padding:1px 0;
-}
-
-.role{
-  color:#737373;
-}
-
-.tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:.35rem;
-}
-
-.tags span{
+  justify-content:space-between;
+  align-items:center;
   font-size:12px;
-  padding:2px 8px;
-  border:1px solid #d4d4d4;
-  border-radius:4px;
-  color:#525252;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.bb-topbar .bb-logo{color:var(--bb-orange);font-weight:bold;letter-spacing:2px}
+.bb-topbar .bb-page-id{color:var(--bb-yellow)}
+.bb-topbar .bb-time{color:var(--bb-green)}
+
+.bb-container{max-width:960px;margin:0 auto;padding:0 8px 40px}
+
+.bb-cmdline{
+  background:var(--bb-dark);
+  border:1px solid var(--bb-border);
+  padding:4px 10px;
+  margin:8px 0;
+  display:flex;align-items:center;gap:8px;
+}
+.bb-cmdline .bb-prompt{color:var(--bb-amber);font-weight:bold}
+.bb-cmdline .bb-cmd{color:var(--bb-yellow)}
+.bb-input{flex:1;background:transparent;border:none;outline:none;color:var(--bb-yellow);font-family:inherit;font-size:13px;caret-color:var(--bb-amber);text-transform:uppercase;letter-spacing:1px}
+.bb-input::placeholder{color:var(--bb-dimgray);text-transform:uppercase}
+.bb-cmdhelp{font-size:11px;color:var(--bb-gray);padding:0 10px 0;margin:-4px 0 4px;display:none}
+.bb-cmdhelp.active{display:block}
+
+.bb-header{border:1px solid var(--bb-border);background:var(--bb-panel);padding:10px 14px;margin:8px 0}
+.bb-header h1{font-size:18px;font-weight:bold;color:var(--bb-orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.bb-header .bb-subtitle{color:var(--bb-gray);font-size:12px}
+
+.bb-nav{display:flex;gap:0;margin:8px 0;border:1px solid var(--bb-border);overflow:hidden}
+.bb-nav a{flex:1;text-align:center;padding:5px 12px;color:var(--bb-white);text-decoration:none;text-transform:uppercase;font-size:11px;letter-spacing:1px;background:var(--bb-panel);border-right:1px solid var(--bb-border);transition:background .1s,color .1s}
+.bb-nav a:last-child{border-right:none}
+.bb-nav a:hover{background:var(--bb-orange);color:var(--bb-black)}
+.bb-nav a.active{background:var(--bb-orange);color:var(--bb-black);font-weight:bold}
+
+.bb-panel{border:1px solid var(--bb-border);background:var(--bb-panel);margin:8px 0}
+.bb-panel-header{background:#1a1a2e;padding:4px 10px;border-bottom:1px solid var(--bb-border);display:flex;justify-content:space-between;align-items:center}
+.bb-panel-header .bb-section-num{color:var(--bb-yellow);font-weight:bold;font-size:12px}
+.bb-panel-header .bb-section-title{color:var(--bb-orange);font-weight:bold;text-transform:uppercase;font-size:12px;letter-spacing:1px}
+.bb-panel-header .bb-count{color:var(--bb-green);font-size:11px}
+.bb-panel-body{padding:8px 12px}
+
+.bb-book-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding:2px 0;
+  border-bottom:1px solid #1a1a1a;
+  gap:12px;
+}
+.bb-book-row:last-child{border-bottom:none}
+
+.bb-book-row a{
+  color:var(--bb-white);
+  text-decoration:none;
+  flex:1;
+  min-width:0;
   white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.bb-book-row a:hover{color:var(--bb-black);background:var(--bb-yellow)}
+
+.bb-book-row .bb-author{
+  color:var(--bb-gray);
+  font-size:12px;
+  flex-shrink:0;
+  text-align:right;
+  max-width:200px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-.links-list a{
-  display:block;
-  width:fit-content;
-  padding:1px 0;
+.bb-book-row .bb-rating{
+  flex-shrink:0;
+  font-size:12px;
+  text-align:right;
+  min-width:50px;
 }
 
-/* staggered fade-in */
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(-0.4em)}
-  to{opacity:1;transform:translateY(0)}
-}
+.bb-rating-5{color:var(--bb-green)}
+.bb-rating-4{color:var(--bb-amber)}
+.bb-rating-3{color:var(--bb-gray)}
 
-main>*{
-  opacity:0;
-  animation:fadeIn .55s ease both;
-}
+.bb-fkeys{position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;border-top:1px solid var(--bb-border);display:flex;justify-content:center;padding:0;z-index:100}
+.bb-fkey{display:flex;align-items:stretch;border-right:1px solid var(--bb-border)}
+.bb-fkey:last-child{border-right:none}
+.bb-fkey .bb-fkey-num{background:var(--bb-dimgray);color:var(--bb-white);font-size:10px;padding:3px 4px;font-weight:bold}
+.bb-fkey .bb-fkey-label{color:var(--bb-amber);font-size:10px;padding:3px 8px}
 
-main>*:nth-child(1){animation-delay:.05s}
-main>*:nth-child(2){animation-delay:.08s}
-main>*:nth-child(3){animation-delay:.14s}
-main>*:nth-child(4){animation-delay:.20s}
-main>*:nth-child(5){animation-delay:.26s}
-main>*:nth-child(6){animation-delay:.32s}
-main>*:nth-child(7){animation-delay:.38s}
-main>*:nth-child(8){animation-delay:.44s}
-main>*:nth-child(9){animation-delay:.50s}
-main>*:nth-child(10){animation-delay:.56s}
-main>*:nth-child(11){animation-delay:.62s}
-main>*:nth-child(12){animation-delay:.68s}
-main>*:nth-child(13){animation-delay:.74s}
-main>*:nth-child(14){animation-delay:.80s}
-main>*:nth-child(15){animation-delay:.86s}
-main>*:nth-child(16){animation-delay:.92s}
-main>*:nth-child(17){animation-delay:.98s}
-main>*:nth-child(18){animation-delay:1.04s}
-main>*:nth-child(19){animation-delay:1.10s}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px)}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bb-black)}
+::-webkit-scrollbar-thumb{background:var(--bb-border)}
+::-webkit-scrollbar-thumb:hover{background:var(--bb-gray)}
 </style>
 </head>
 <body>
-<main>
 
-<h1>nicolaj nørgaard peulicke</h1>
-<p class="location">denmark</p>
+<div class="bb-topbar">
+  <span class="bb-logo">NICOLAJ</span>
+  <span class="bb-page-id">READING &lt;GO&gt;</span>
+  <span class="bb-time" id="bb-clock"></span>
+</div>
 
-<nav class="menu" aria-label="site">
-  <a href="index.html">home</a>
-  <a href="reading-list.html" aria-current="page">reading list</a>
-  <a href="bookmarks.html">bookmarks</a>
+<div class="bb-container">
+
+<div class="bb-cmdline" id="bb-cmdline">
+  <span class="bb-prompt">READING LIST</span>
+  <input type="text" id="bb-input" class="bb-input" spellcheck="false" autocomplete="off" autofocus placeholder="TYPE COMMAND &lt;GO&gt;">
+</div>
+<div class="bb-cmdhelp" id="bb-cmdhelp"></div>
+
+<div class="bb-header">
+  <h1>Nicolaj N&oslash;rgaard Peulicke</h1>
+  <span class="bb-subtitle">DENMARK &nbsp;|&nbsp; AUDIBLE LIBRARY &mdash; RATED LIST</span>
+</div>
+
+<nav class="bb-nav" aria-label="site">
+  <a href="index.html">1) HOME</a>
+  <a href="reading-list.html" class="active">2) READING LIST</a>
+  <a href="bookmarks.html">3) BOOKMARKS</a>
 </nav>
 
-<h2>📚 audible library — rated list</h2>
+<!-- 5 stars -->
+<div class="bb-panel">
+  <div class="bb-panel-header">
+    <span class="bb-section-num">1)</span>
+    <span class="bb-section-title">Classics / Top Tier</span>
+    <span class="bb-count">20 titles</span>
+  </div>
+  <div class="bb-panel-body">
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Sapiens+Yuval+Noah+Harari" target="_blank" rel="noopener">Sapiens</a><span class="bb-author">Yuval Noah Harari</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Thinking%2C+Fast+and+Slow+Daniel+Kahneman" target="_blank" rel="noopener">Thinking, Fast and Slow</a><span class="bb-author">Daniel Kahneman</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Shoe+Dog+Phil+Knight" target="_blank" rel="noopener">Shoe Dog</a><span class="bb-author">Phil Knight</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Hard+Thing+About+Hard+Things+Ben+Horowitz" target="_blank" rel="noopener">The Hard Thing About Hard Things</a><span class="bb-author">Ben Horowitz</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Bad+Blood+John+Carreyrou" target="_blank" rel="noopener">Bad Blood</a><span class="bb-author">John Carreyrou</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Range+David+Epstein" target="_blank" rel="noopener">Range</a><span class="bb-author">David Epstein</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Principles+Ray+Dalio" target="_blank" rel="noopener">Principles</a><span class="bb-author">Ray Dalio</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Ride+of+a+Lifetime+Robert+Iger" target="_blank" rel="noopener">The Ride of a Lifetime</a><span class="bb-author">Robert Iger</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Innovators+Walter+Isaacson" target="_blank" rel="noopener">The Innovators</a><span class="bb-author">Walter Isaacson</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Leonardo+da+Vinci+Walter+Isaacson" target="_blank" rel="noopener">Leonardo da Vinci</a><span class="bb-author">Walter Isaacson</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Undoing+Project+Michael+Lewis" target="_blank" rel="noopener">The Undoing Project</a><span class="bb-author">Michael Lewis</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Flow+Mihaly+Csikszentmihalyi" target="_blank" rel="noopener">Flow</a><span class="bb-author">Mihaly Csikszentmihalyi</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Radical+Candor+Kim+Scott" target="_blank" rel="noopener">Radical Candor</a><span class="bb-author">Kim Scott</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Culture+Code+Daniel+Coyle" target="_blank" rel="noopener">The Culture Code</a><span class="bb-author">Daniel Coyle</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Zero+to+One+Peter+Thiel" target="_blank" rel="noopener">Zero to One</a><span class="bb-author">Peter Thiel &amp; Blake Masters</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Good+Strategy%2FBad+Strategy+Richard+Rumelt" target="_blank" rel="noopener">Good Strategy/Bad Strategy</a><span class="bb-author">Richard Rumelt</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Obstacle+Is+the+Way+Ryan+Holiday" target="_blank" rel="noopener">The Obstacle Is the Way</a><span class="bb-author">Ryan Holiday</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Algorithms+to+Live+By+Brian+Christian" target="_blank" rel="noopener">Algorithms to Live By</a><span class="bb-author">Brian Christian &amp; Tom Griffiths</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Snowball+Alice+Schroeder" target="_blank" rel="noopener">The Snowball</a><span class="bb-author">Alice Schroeder</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Invisible+Women+Caroline+Criado+Perez" target="_blank" rel="noopener">Invisible Women</a><span class="bb-author">Caroline Criado Perez</span><span class="bb-rating bb-rating-5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+  </div>
+</div>
 
-<h2>⭐⭐⭐⭐⭐ classics / top tier</h2>
-<ul class="links-list">
-  <li><a href="https://www.amazon.com/s?k=Sapiens+Yuval+Noah+Harari" target="_blank" rel="noopener">Sapiens — Yuval Noah Harari — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Thinking%2C+Fast+and+Slow+Daniel+Kahneman" target="_blank" rel="noopener">Thinking, Fast and Slow — Daniel Kahneman — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Shoe+Dog+Phil+Knight" target="_blank" rel="noopener">Shoe Dog — Phil Knight — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Hard+Thing+About+Hard+Things+Ben+Horowitz" target="_blank" rel="noopener">The Hard Thing About Hard Things — Ben Horowitz — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Bad+Blood+John+Carreyrou" target="_blank" rel="noopener">Bad Blood — John Carreyrou — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Range+David+Epstein" target="_blank" rel="noopener">Range — David Epstein — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Principles+Ray+Dalio" target="_blank" rel="noopener">Principles — Ray Dalio — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Ride+of+a+Lifetime+Robert+Iger" target="_blank" rel="noopener">The Ride of a Lifetime — Robert Iger — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Innovators+Walter+Isaacson" target="_blank" rel="noopener">The Innovators — Walter Isaacson — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Leonardo+da+Vinci+Walter+Isaacson" target="_blank" rel="noopener">Leonardo da Vinci — Walter Isaacson — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Undoing+Project+Michael+Lewis" target="_blank" rel="noopener">The Undoing Project — Michael Lewis — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Flow+Mihaly+Csikszentmihalyi" target="_blank" rel="noopener">Flow — Mihaly Csikszentmihalyi — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Radical+Candor+Kim+Scott" target="_blank" rel="noopener">Radical Candor — Kim Scott — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Culture+Code+Daniel+Coyle" target="_blank" rel="noopener">The Culture Code — Daniel Coyle — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Zero+to+One+Peter+Thiel+%26+Blake+Masters" target="_blank" rel="noopener">Zero to One — Peter Thiel &amp; Blake Masters — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Good+Strategy%2FBad+Strategy+Richard+Rumelt" target="_blank" rel="noopener">Good Strategy/Bad Strategy — Richard Rumelt — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Obstacle+Is+the+Way+Ryan+Holiday" target="_blank" rel="noopener">The Obstacle Is the Way — Ryan Holiday — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Algorithms+to+Live+By+Brian+Christian+%26+Tom+Griffiths" target="_blank" rel="noopener">Algorithms to Live By — Brian Christian &amp; Tom Griffiths — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Snowball+Alice+Schroeder" target="_blank" rel="noopener">The Snowball — Alice Schroeder — ★★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Invisible+Women+Caroline+Criado+Perez" target="_blank" rel="noopener">Invisible Women — Caroline Criado Perez — ★★★★★</a></li>
-</ul>
+<!-- 4 stars -->
+<div class="bb-panel">
+  <div class="bb-panel-header">
+    <span class="bb-section-num">2)</span>
+    <span class="bb-section-title">Very Strong</span>
+    <span class="bb-count">38 titles</span>
+  </div>
+  <div class="bb-panel-body">
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Accelerate+Nicole+Forsgren" target="_blank" rel="noopener">Accelerate</a><span class="bb-author">Forsgren, Humble &amp; Kim</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Trillion+Dollar+Coach+Eric+Schmidt" target="_blank" rel="noopener">Trillion Dollar Coach</a><span class="bb-author">Eric Schmidt et al.</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Loonshots+Safi+Bahcall" target="_blank" rel="noopener">Loonshots</a><span class="bb-author">Safi Bahcall</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Cold+Start+Problem+Andrew+Chen" target="_blank" rel="noopener">The Cold Start Problem</a><span class="bb-author">Andrew Chen</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Amazon+Unbound+Brad+Stone" target="_blank" rel="noopener">Amazon Unbound</a><span class="bb-author">Brad Stone</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Everything+Store+Brad+Stone" target="_blank" rel="noopener">The Everything Store</a><span class="bb-author">Brad Stone</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Superforecasting+Philip+Tetlock" target="_blank" rel="noopener">Superforecasting</a><span class="bb-author">Tetlock &amp; Gardner</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Big+Nine+Amy+Webb" target="_blank" rel="noopener">The Big Nine</a><span class="bb-author">Amy Webb</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Tools+of+Titans+Tim+Ferriss" target="_blank" rel="noopener">Tools of Titans</a><span class="bb-author">Tim Ferriss</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Startupland+Mikkel+Svane" target="_blank" rel="noopener">Startupland</a><span class="bb-author">Mikkel Svane</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Power+Law+Sebastian+Mallaby" target="_blank" rel="noopener">The Power Law</a><span class="bb-author">Sebastian Mallaby</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=High+Growth+Handbook+Elad+Gil" target="_blank" rel="noopener">High Growth Handbook</a><span class="bb-author">Elad Gil</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Subtle+Art+of+Not+Giving+a+F*ck+Mark+Manson" target="_blank" rel="noopener">The Subtle Art of Not Giving a F*ck</a><span class="bb-author">Mark Manson</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Inevitable+Kevin+Kelly" target="_blank" rel="noopener">The Inevitable</a><span class="bb-author">Kevin Kelly</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Sprint+Jake+Knapp" target="_blank" rel="noopener">Sprint</a><span class="bb-author">Knapp, Zeratsky &amp; Kowitz</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Platform+Revolution+Parker" target="_blank" rel="noopener">Platform Revolution</a><span class="bb-author">Parker, Van Alstyne &amp; Choudary</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Man+Who+Solved+the+Market+Gregory+Zuckerman" target="_blank" rel="noopener">The Man Who Solved the Market</a><span class="bb-author">Gregory Zuckerman</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Permanent+Record+Edward+Snowden" target="_blank" rel="noopener">Permanent Record</a><span class="bb-author">Edward Snowden</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Working+Backwards+Colin+Bryar" target="_blank" rel="noopener">Working Backwards</a><span class="bb-author">Colin Bryar &amp; Bill Carr</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Think+Again+Adam+Grant" target="_blank" rel="noopener">Think Again</a><span class="bb-author">Adam Grant</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=AI+Superpowers+Kai-Fu+Lee" target="_blank" rel="noopener">AI Superpowers</a><span class="bb-author">Kai-Fu Lee</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Secrets+of+Sand+Hill+Road+Scott+Kupor" target="_blank" rel="noopener">Secrets of Sand Hill Road</a><span class="bb-author">Scott Kupor</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Project+to+Product+Mik+Kersten" target="_blank" rel="noopener">Project to Product</a><span class="bb-author">Mik Kersten</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Founder%E2%80%99s+Mentality+Chris+Zook" target="_blank" rel="noopener">The Founder's Mentality</a><span class="bb-author">Chris Zook &amp; James Allen</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Lost+and+Founder+Rand+Fishkin" target="_blank" rel="noopener">Lost and Founder</a><span class="bb-author">Rand Fishkin</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Coaching+Habit+Michael+Bungay+Stanier" target="_blank" rel="noopener">The Coaching Habit</a><span class="bb-author">Michael Bungay Stanier</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Chaos+Monkeys+Antonio+Garcia+Martinez" target="_blank" rel="noopener">Chaos Monkeys</a><span class="bb-author">Antonio Garc&iacute;a Mart&iacute;nez</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Launch+Pad+Randall+Stross" target="_blank" rel="noopener">The Launch Pad</a><span class="bb-author">Randall Stross</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Stealing+Fire+Steven+Kotler" target="_blank" rel="noopener">Stealing Fire</a><span class="bb-author">Steven Kotler &amp; Jamie Wheal</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Four+Scott+Galloway" target="_blank" rel="noopener">The Four</a><span class="bb-author">Scott Galloway</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Hit+Refresh+Satya+Nadella" target="_blank" rel="noopener">Hit Refresh</a><span class="bb-author">Satya Nadella</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Creative+Confidence+Tom+Kelley" target="_blank" rel="noopener">Creative Confidence</a><span class="bb-author">Tom Kelley &amp; David Kelley</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Machine+Platform+Crowd+Erik+Brynjolfsson" target="_blank" rel="noopener">Machine, Platform, Crowd</a><span class="bb-author">Brynjolfsson &amp; McAfee</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Seventh+Sense+Joshua+Cooper+Ramo" target="_blank" rel="noopener">The Seventh Sense</a><span class="bb-author">Joshua Cooper Ramo</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Flash+Boys+Michael+Lewis" target="_blank" rel="noopener">Flash Boys</a><span class="bb-author">Michael Lewis</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Born+to+Run+Bruce+Springsteen" target="_blank" rel="noopener">Born to Run</a><span class="bb-author">Bruce Springsteen</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Upstarts+Brad+Stone" target="_blank" rel="noopener">The Upstarts</a><span class="bb-author">Brad Stone</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Benjamin+Franklin+Walter+Isaacson" target="_blank" rel="noopener">Benjamin Franklin</a><span class="bb-author">Walter Isaacson</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Hackers+Steven+Levy" target="_blank" rel="noopener">Hackers</a><span class="bb-author">Steven Levy</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Mathematical+Corporation+Josh+Sullivan" target="_blank" rel="noopener">The Mathematical Corporation</a><span class="bb-author">Sullivan &amp; Zutavern</span><span class="bb-rating bb-rating-4">&#9733;&#9733;&#9733;&#9733;</span></div>
+  </div>
+</div>
 
-<h2>⭐⭐⭐⭐ very strong</h2>
-<ul class="links-list">
-  <li><a href="https://www.amazon.com/s?k=Accelerate+Nicole+Forsgren%2C+Jez+Humble+%26+Gene+Kim" target="_blank" rel="noopener">Accelerate — Nicole Forsgren, Jez Humble &amp; Gene Kim — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Trillion+Dollar+Coach+Eric+Schmidt+et+al." target="_blank" rel="noopener">Trillion Dollar Coach — Eric Schmidt et al. — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Loonshots+Safi+Bahcall" target="_blank" rel="noopener">Loonshots — Safi Bahcall — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Cold+Start+Problem+Andrew+Chen" target="_blank" rel="noopener">The Cold Start Problem — Andrew Chen — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Amazon+Unbound+Brad+Stone" target="_blank" rel="noopener">Amazon Unbound — Brad Stone — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Everything+Store+Brad+Stone" target="_blank" rel="noopener">The Everything Store — Brad Stone — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Superforecasting+Philip+Tetlock+%26+Dan+Gardner" target="_blank" rel="noopener">Superforecasting — Philip Tetlock &amp; Dan Gardner — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Big+Nine+Amy+Webb" target="_blank" rel="noopener">The Big Nine — Amy Webb — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Tools+of+Titans+Tim+Ferriss" target="_blank" rel="noopener">Tools of Titans — Tim Ferriss — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Startupland+Mikkel+Svane" target="_blank" rel="noopener">Startupland — Mikkel Svane — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Power+Law+Sebastian+Mallaby" target="_blank" rel="noopener">The Power Law — Sebastian Mallaby — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=High+Growth+Handbook+Elad+Gil" target="_blank" rel="noopener">High Growth Handbook — Elad Gil — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Subtle+Art+of+Not+Giving+a+F%2Ack+Mark+Manson" target="_blank" rel="noopener">The Subtle Art of Not Giving a F*ck — Mark Manson — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Inevitable+Kevin+Kelly" target="_blank" rel="noopener">The Inevitable — Kevin Kelly — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Sprint+Jake+Knapp%2C+John+Zeratsky+%26+Braden+Kowitz" target="_blank" rel="noopener">Sprint — Jake Knapp, John Zeratsky &amp; Braden Kowitz — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Platform+Revolution+Parker%2C+Van+Alstyne+%26+Choudary" target="_blank" rel="noopener">Platform Revolution — Parker, Van Alstyne &amp; Choudary — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Man+Who+Solved+the+Market+Gregory+Zuckerman" target="_blank" rel="noopener">The Man Who Solved the Market — Gregory Zuckerman — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Permanent+Record+Edward+Snowden" target="_blank" rel="noopener">Permanent Record — Edward Snowden — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Working+Backwards+Colin+Bryar+%26+Bill+Carr" target="_blank" rel="noopener">Working Backwards — Colin Bryar &amp; Bill Carr — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Think+Again+Adam+Grant" target="_blank" rel="noopener">Think Again — Adam Grant — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=AI+Superpowers+Kai-Fu+Lee" target="_blank" rel="noopener">AI Superpowers — Kai-Fu Lee — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Secrets+of+Sand+Hill+Road+Scott+Kupor" target="_blank" rel="noopener">Secrets of Sand Hill Road — Scott Kupor — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Project+to+Product+Mik+Kersten" target="_blank" rel="noopener">Project to Product — Mik Kersten — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Founder%E2%80%99s+Mentality+Chris+Zook+%26+James+Allen" target="_blank" rel="noopener">The Founder’s Mentality — Chris Zook &amp; James Allen — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Lost+and+Founder+Rand+Fishkin" target="_blank" rel="noopener">Lost and Founder — Rand Fishkin — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Coaching+Habit+Michael+Bungay+Stanier" target="_blank" rel="noopener">The Coaching Habit — Michael Bungay Stanier — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Chaos+Monkeys+Antonio+Garc%C3%ADa+Mart%C3%ADnez" target="_blank" rel="noopener">Chaos Monkeys — Antonio García Martínez — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Launch+Pad+Randall+Stross" target="_blank" rel="noopener">The Launch Pad — Randall Stross — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Stealing+Fire+Steven+Kotler+%26+Jamie+Wheal" target="_blank" rel="noopener">Stealing Fire — Steven Kotler &amp; Jamie Wheal — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Four+Scott+Galloway" target="_blank" rel="noopener">The Four — Scott Galloway — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Hit+Refresh+Satya+Nadella" target="_blank" rel="noopener">Hit Refresh — Satya Nadella — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Creative+Confidence+Tom+Kelley+%26+David+Kelley" target="_blank" rel="noopener">Creative Confidence — Tom Kelley &amp; David Kelley — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Machine%2C+Platform%2C+Crowd+Erik+Brynjolfsson+%26+Andrew+McAfee" target="_blank" rel="noopener">Machine, Platform, Crowd — Erik Brynjolfsson &amp; Andrew McAfee — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Seventh+Sense+Joshua+Cooper+Ramo" target="_blank" rel="noopener">The Seventh Sense — Joshua Cooper Ramo — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Flash+Boys+Michael+Lewis" target="_blank" rel="noopener">Flash Boys — Michael Lewis — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Born+to+Run+Bruce+Springsteen" target="_blank" rel="noopener">Born to Run — Bruce Springsteen — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Upstarts+Brad+Stone" target="_blank" rel="noopener">The Upstarts — Brad Stone — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Benjamin+Franklin+Walter+Isaacson" target="_blank" rel="noopener">Benjamin Franklin — Walter Isaacson — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Hackers+Steven+Levy" target="_blank" rel="noopener">Hackers — Steven Levy — ★★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Mathematical+Corporation+Josh+Sullivan+%26+Angela+Zutavern" target="_blank" rel="noopener">The Mathematical Corporation — Josh Sullivan &amp; Angela Zutavern — ★★★★</a></li>
-</ul>
+<!-- 3 stars -->
+<div class="bb-panel">
+  <div class="bb-panel-header">
+    <span class="bb-section-num">3)</span>
+    <span class="bb-section-title">Good / Interest-Dependent</span>
+    <span class="bb-count">55 titles</span>
+  </div>
+  <div class="bb-panel-body">
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Beyond+Digital+Paul+Leinwand" target="_blank" rel="noopener">Beyond Digital</a><span class="bb-author">Leinwand &amp; Mani</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Repeatability+Chris+Zook" target="_blank" rel="noopener">Repeatability</a><span class="bb-author">Chris Zook &amp; James Allen</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Big+Score+Michael+S.+Malone" target="_blank" rel="noopener">The Big Score</a><span class="bb-author">Michael S. Malone</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Squiggly+Career+Helen+Tupper" target="_blank" rel="noopener">The Squiggly Career</a><span class="bb-author">Tupper &amp; Ellis</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=More+From+Less+Andrew+McAfee" target="_blank" rel="noopener">More From Less</a><span class="bb-author">Andrew McAfee</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Nail+It+Then+Scale+It+Nathan+Furr" target="_blank" rel="noopener">Nail It Then Scale It</a><span class="bb-author">Furr &amp; Ahlstrom</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Utopia+for+Realists+Rutger+Bregman" target="_blank" rel="noopener">Utopia for Realists</a><span class="bb-author">Rutger Bregman</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Friday+Forward+Robert+Glazer" target="_blank" rel="noopener">Friday Forward</a><span class="bb-author">Robert Glazer</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Elevate+Robert+Glazer" target="_blank" rel="noopener">Elevate</a><span class="bb-author">Robert Glazer</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Digital+Darwinism+Tom+Goodwin" target="_blank" rel="noopener">Digital Darwinism</a><span class="bb-author">Tom Goodwin</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Everyday+Chaos+David+Weinberger" target="_blank" rel="noopener">Everyday Chaos</a><span class="bb-author">David Weinberger</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Tools+and+Weapons+Brad+Smith" target="_blank" rel="noopener">Tools and Weapons</a><span class="bb-author">Brad Smith</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Facebook+Steven+Levy" target="_blank" rel="noopener">Facebook</a><span class="bb-author">Steven Levy</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Trailblazer+Marc+Benioff" target="_blank" rel="noopener">Trailblazer</a><span class="bb-author">Benioff &amp; Langley</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Stubborn+Attachments+Tyler+Cowen" target="_blank" rel="noopener">Stubborn Attachments</a><span class="bb-author">Tyler Cowen</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Nine+Lies+About+Work+Marcus+Buckingham" target="_blank" rel="noopener">Nine Lies About Work</a><span class="bb-author">Buckingham &amp; Goodall</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+10X+Rule+Grant+Cardone" target="_blank" rel="noopener">The 10X Rule</a><span class="bb-author">Grant Cardone</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Run+to+Win+Stephanie+Schriock" target="_blank" rel="noopener">Run to Win</a><span class="bb-author">Schriock &amp; Reynolds</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=2030+Mauro+F.+Guillen" target="_blank" rel="noopener">2030</a><span class="bb-author">Mauro F. Guill&eacute;n</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Invent+and+Wander+Jeff+Bezos" target="_blank" rel="noopener">Invent and Wander</a><span class="bb-author">Jeff Bezos</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Master+Switch+Tim+Wu" target="_blank" rel="noopener">The Master Switch</a><span class="bb-author">Tim Wu</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Thinking+in+Bets+Annie+Duke" target="_blank" rel="noopener">Thinking in Bets</a><span class="bb-author">Annie Duke</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Kochland+Christopher+Leonard" target="_blank" rel="noopener">Kochland</a><span class="bb-author">Christopher Leonard</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Too+Much+and+Never+Enough+Mary+L.+Trump" target="_blank" rel="noopener">Too Much and Never Enough</a><span class="bb-author">Mary L. Trump</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Whistleblower+Susan+Fowler" target="_blank" rel="noopener">Whistleblower</a><span class="bb-author">Susan Fowler</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=No+Filter+Sarah+Frier" target="_blank" rel="noopener">No Filter</a><span class="bb-author">Sarah Frier</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Dark+Towers+David+Enrich" target="_blank" rel="noopener">Dark Towers</a><span class="bb-author">David Enrich</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Sandworm+Andy+Greenberg" target="_blank" rel="noopener">Sandworm</a><span class="bb-author">Andy Greenberg</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Lenin+the+Dictator+Victor+Sebestyen" target="_blank" rel="noopener">Lenin the Dictator</a><span class="bb-author">Victor Sebestyen</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Dapper+Dan+Made+in+Harlem" target="_blank" rel="noopener">Dapper Dan: Made in Harlem</a><span class="bb-author">Daniel R. Day</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Mindf*ck+Christopher+Wylie" target="_blank" rel="noopener">Mindf*ck</a><span class="bb-author">Christopher Wylie</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Billion+Dollar+Whale+Bradley+Hope" target="_blank" rel="noopener">Billion Dollar Whale</a><span class="bb-author">Hope &amp; Wright</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Billion+Dollar+Loser+Reeves+Wiedeman" target="_blank" rel="noopener">Billion Dollar Loser</a><span class="bb-author">Reeves Wiedeman</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Peril+Bob+Woodward" target="_blank" rel="noopener">Peril</a><span class="bb-author">Woodward &amp; Costa</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Blood+and+Oil+Bradley+Hope" target="_blank" rel="noopener">Blood and Oil</a><span class="bb-author">Hope &amp; Scheck</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Samsung+Rising+Geoffrey+Cain" target="_blank" rel="noopener">Samsung Rising</a><span class="bb-author">Geoffrey Cain</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Power+to+the+Public+Tara+Dawson+McGuinness" target="_blank" rel="noopener">Power to the Public</a><span class="bb-author">McGuinness &amp; Schank</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=%23Deleted+Allum+Bokhari" target="_blank" rel="noopener">#Deleted</a><span class="bb-author">Allum Bokhari</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=How+to+Avoid+a+Climate+Disaster+Bill+Gates" target="_blank" rel="noopener">How to Avoid a Climate Disaster</a><span class="bb-author">Bill Gates</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=WTF+Tim+O%E2%80%99Reilly" target="_blank" rel="noopener">WTF?</a><span class="bb-author">Tim O'Reilly</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Fire+and+Fury+Michael+Wolff" target="_blank" rel="noopener">Fire and Fury</a><span class="bb-author">Michael Wolff</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Move+Fast+and+Break+Things+Jonathan+Taplin" target="_blank" rel="noopener">Move Fast and Break Things</a><span class="bb-author">Jonathan Taplin</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=What+Happened+Hillary+Rodham+Clinton" target="_blank" rel="noopener">What Happened</a><span class="bb-author">Hillary Rodham Clinton</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Troublemakers+Leslie+Berlin" target="_blank" rel="noopener">Troublemakers</a><span class="bb-author">Leslie Berlin</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Brotopia+Emily+Chang" target="_blank" rel="noopener">Brotopia</a><span class="bb-author">Emily Chang</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Crushing+It+Gary+Vaynerchuk" target="_blank" rel="noopener">Crushing It!</a><span class="bb-author">Gary Vaynerchuk</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Adaptive+Markets+Andrew+W.+Lo" target="_blank" rel="noopener">Adaptive Markets</a><span class="bb-author">Andrew W. Lo</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Deep+Thinking+Garry+Kasparov" target="_blank" rel="noopener">Deep Thinking</a><span class="bb-author">Kasparov &amp; Greengard</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Disrupted+Dan+Lyons" target="_blank" rel="noopener">Disrupted</a><span class="bb-author">Dan Lyons</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Corruptible+Brian+Klaas" target="_blank" rel="noopener">Corruptible</a><span class="bb-author">Brian Klaas</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Contrarian+Max+Chafkin" target="_blank" rel="noopener">The Contrarian</a><span class="bb-author">Max Chafkin</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Founders+Jimmy+Soni" target="_blank" rel="noopener">The Founders</a><span class="bb-author">Jimmy Soni</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=The+Greatest+Story+Ever+Told+Lawrence+M.+Krauss" target="_blank" rel="noopener">The Greatest Story Ever Told &mdash; So Far</a><span class="bb-author">Lawrence M. Krauss</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=English+Grammar+Boot+Camp+Anne+Curzan" target="_blank" rel="noopener">English Grammar Boot Camp</a><span class="bb-author">Anne Curzan</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+    <div class="bb-book-row"><a href="https://www.amazon.com/s?k=Will+It+Fly+Pat+Flynn" target="_blank" rel="noopener">Will It Fly?</a><span class="bb-author">Pat Flynn</span><span class="bb-rating bb-rating-3">&#9733;&#9733;&#9733;</span></div>
+  </div>
+</div>
 
-<h2>⭐⭐⭐ good / interest-dependent</h2>
-<ul class="links-list">
-  <li><a href="https://www.amazon.com/s?k=Beyond+Digital+Paul+Leinwand+%26+Mahadeva+Matt+Mani" target="_blank" rel="noopener">Beyond Digital — Paul Leinwand &amp; Mahadeva Matt Mani — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Repeatability+Chris+Zook+%26+James+Allen" target="_blank" rel="noopener">Repeatability — Chris Zook &amp; James Allen — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Big+Score+Michael+S.+Malone" target="_blank" rel="noopener">The Big Score — Michael S. Malone — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Squiggly+Career+Helen+Tupper+%26+Sarah+Ellis" target="_blank" rel="noopener">The Squiggly Career — Helen Tupper &amp; Sarah Ellis — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=More+From+Less+Andrew+McAfee" target="_blank" rel="noopener">More From Less — Andrew McAfee — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Nail+It+Then+Scale+It+Nathan+Furr+%26+Paul+Ahlstrom" target="_blank" rel="noopener">Nail It Then Scale It — Nathan Furr &amp; Paul Ahlstrom — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Utopia+for+Realists+Rutger+Bregman" target="_blank" rel="noopener">Utopia for Realists — Rutger Bregman — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Friday+Forward+Robert+Glazer" target="_blank" rel="noopener">Friday Forward — Robert Glazer — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Elevate+Robert+Glazer" target="_blank" rel="noopener">Elevate — Robert Glazer — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Digital+Darwinism+Tom+Goodwin" target="_blank" rel="noopener">Digital Darwinism — Tom Goodwin — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Everyday+Chaos+David+Weinberger" target="_blank" rel="noopener">Everyday Chaos — David Weinberger — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Tools+and+Weapons+Brad+Smith" target="_blank" rel="noopener">Tools and Weapons — Brad Smith — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Facebook+Steven+Levy" target="_blank" rel="noopener">Facebook — Steven Levy — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Trailblazer+Marc+Benioff+%26+Monica+Langley" target="_blank" rel="noopener">Trailblazer — Marc Benioff &amp; Monica Langley — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Stubborn+Attachments+Tyler+Cowen" target="_blank" rel="noopener">Stubborn Attachments — Tyler Cowen — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Nine+Lies+About+Work+Marcus+Buckingham+%26+Ashley+Goodall" target="_blank" rel="noopener">Nine Lies About Work — Marcus Buckingham &amp; Ashley Goodall — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+10X+Rule+Grant+Cardone" target="_blank" rel="noopener">The 10X Rule — Grant Cardone — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Run+to+Win+Stephanie+Schriock+%26+Christina+Reynolds" target="_blank" rel="noopener">Run to Win — Stephanie Schriock &amp; Christina Reynolds — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=2030+Mauro+F.+Guill%C3%A9n" target="_blank" rel="noopener">2030 — Mauro F. Guillén — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Invent+and+Wander+Jeff+Bezos" target="_blank" rel="noopener">Invent and Wander — Jeff Bezos — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Master+Switch+Tim+Wu" target="_blank" rel="noopener">The Master Switch — Tim Wu — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Thinking+in+Bets+Annie+Duke" target="_blank" rel="noopener">Thinking in Bets — Annie Duke — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Kochland+Christopher+Leonard" target="_blank" rel="noopener">Kochland — Christopher Leonard — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Too+Much+and+Never+Enough+Mary+L.+Trump" target="_blank" rel="noopener">Too Much and Never Enough — Mary L. Trump — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Whistleblower+Susan+Fowler" target="_blank" rel="noopener">Whistleblower — Susan Fowler — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=No+Filter+Sarah+Frier" target="_blank" rel="noopener">No Filter — Sarah Frier — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Dark+Towers+David+Enrich" target="_blank" rel="noopener">Dark Towers — David Enrich — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Sandworm+Andy+Greenberg" target="_blank" rel="noopener">Sandworm — Andy Greenberg — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Lenin+the+Dictator+Victor+Sebestyen" target="_blank" rel="noopener">Lenin the Dictator — Victor Sebestyen — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Dapper+Dan%3A+Made+in+Harlem+Daniel+R.+Day" target="_blank" rel="noopener">Dapper Dan: Made in Harlem — Daniel R. Day — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Mindf%2Ack+Christopher+Wylie" target="_blank" rel="noopener">Mindf*ck — Christopher Wylie — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Billion+Dollar+Whale+Bradley+Hope+%26+Tom+Wright" target="_blank" rel="noopener">Billion Dollar Whale — Bradley Hope &amp; Tom Wright — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Billion+Dollar+Loser+Reeves+Wiedeman" target="_blank" rel="noopener">Billion Dollar Loser — Reeves Wiedeman — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Peril+Bob+Woodward+%26+Robert+Costa" target="_blank" rel="noopener">Peril — Bob Woodward &amp; Robert Costa — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Blood+and+Oil+Bradley+Hope+%26+Justin+Scheck" target="_blank" rel="noopener">Blood and Oil — Bradley Hope &amp; Justin Scheck — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Samsung+Rising+Geoffrey+Cain" target="_blank" rel="noopener">Samsung Rising — Geoffrey Cain — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Power+to+the+Public+Tara+Dawson+McGuinness+%26+Hana+Schank" target="_blank" rel="noopener">Power to the Public — Tara Dawson McGuinness &amp; Hana Schank — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=%23Deleted+Allum+Bokhari" target="_blank" rel="noopener">#Deleted — Allum Bokhari — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=How+to+Avoid+a+Climate+Disaster+Bill+Gates" target="_blank" rel="noopener">How to Avoid a Climate Disaster — Bill Gates — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=WTF%3F+Tim+O%E2%80%99Reilly" target="_blank" rel="noopener">WTF? — Tim O’Reilly — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Fire+and+Fury+Michael+Wolff" target="_blank" rel="noopener">Fire and Fury — Michael Wolff — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Move+Fast+and+Break+Things+Jonathan+Taplin" target="_blank" rel="noopener">Move Fast and Break Things — Jonathan Taplin — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=What+Happened+Hillary+Rodham+Clinton" target="_blank" rel="noopener">What Happened — Hillary Rodham Clinton — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Troublemakers+Leslie+Berlin" target="_blank" rel="noopener">Troublemakers — Leslie Berlin — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Brotopia+Emily+Chang" target="_blank" rel="noopener">Brotopia — Emily Chang — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Crushing+It%21+Gary+Vaynerchuk" target="_blank" rel="noopener">Crushing It! — Gary Vaynerchuk — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Adaptive+Markets+Andrew+W.+Lo" target="_blank" rel="noopener">Adaptive Markets — Andrew W. Lo — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Deep+Thinking+Garry+Kasparov+%26+Mig+Greengard" target="_blank" rel="noopener">Deep Thinking — Garry Kasparov &amp; Mig Greengard — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Disrupted+Dan+Lyons" target="_blank" rel="noopener">Disrupted — Dan Lyons — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Corruptible+Brian+Klaas" target="_blank" rel="noopener">Corruptible — Brian Klaas — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Contrarian+Max+Chafkin" target="_blank" rel="noopener">The Contrarian — Max Chafkin — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Founders+Jimmy+Soni" target="_blank" rel="noopener">The Founders — Jimmy Soni — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=The+Greatest+Story+Ever+Told+%E2%80%94+So+Far+Lawrence+M.+Krauss" target="_blank" rel="noopener">The Greatest Story Ever Told — So Far — Lawrence M. Krauss — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=English+Grammar+Boot+Camp+Anne+Curzan" target="_blank" rel="noopener">English Grammar Boot Camp — Anne Curzan — ★★★</a></li>
-  <li><a href="https://www.amazon.com/s?k=Will+It+Fly%3F+Pat+Flynn" target="_blank" rel="noopener">Will It Fly? — Pat Flynn — ★★★</a></li>
-</ul>
+</div>
 
-</main>
+<div class="bb-fkeys">
+  <div class="bb-fkey"><span class="bb-fkey-num">F1</span><span class="bb-fkey-label">HELP</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F2</span><span class="bb-fkey-label">HOME</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F3</span><span class="bb-fkey-label">READING</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F4</span><span class="bb-fkey-label">BOOKMARKS</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F5</span><span class="bb-fkey-label">5-STAR</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F6</span><span class="bb-fkey-label">4-STAR</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F7</span><span class="bb-fkey-label">3-STAR</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F8</span><span class="bb-fkey-label">SEARCH</span></div>
+</div>
+
+<script>
+function updateClock(){
+  const now=new Date();
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  const s=String(now.getSeconds()).padStart(2,'0');
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const d=String(now.getDate()).padStart(2,'0');
+  const mon=months[now.getMonth()];
+  const y=now.getFullYear();
+  document.getElementById('bb-clock').textContent=d+' '+mon+' '+y+'  '+h+':'+m+':'+s;
+}
+updateClock();
+setInterval(updateClock,1000);
+
+const routes={
+  'home':'index.html','1':'index.html',
+  'reading':'reading-list.html','reading list':'reading-list.html','2':'reading-list.html',
+  'bookmarks':'bookmarks.html','3':'bookmarks.html'
+};
+const input=document.getElementById('bb-input');
+const help=document.getElementById('bb-cmdhelp');
+
+input.addEventListener('input',function(){
+  const v=this.value.replace(/<go>/gi,'').trim().toLowerCase();
+  if(v.length>0){
+    const matches=Object.keys(routes).filter(k=>k.startsWith(v));
+    if(matches.length>0){
+      help.textContent='COMMANDS: '+matches.map(m=>m.toUpperCase()+' <GO>').join(' | ');
+      help.classList.add('active');
+    }else{
+      help.textContent='UNKNOWN COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';
+      help.classList.add('active');
+    }
+  }else{
+    help.classList.remove('active');
+  }
+});
+
+input.addEventListener('keydown',function(e){
+  if(e.key==='Enter'){
+    const v=this.value.replace(/<go>/gi,'').trim().toLowerCase();
+    const dest=routes[v];
+    if(dest){window.location.href=dest}
+    else{
+      help.textContent='INVALID COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';
+      help.classList.add('active');
+      this.value='';
+    }
+  }
+});
+
+document.getElementById('bb-cmdline').addEventListener('click',function(){input.focus()});
+document.addEventListener('keydown',function(e){
+  if(document.activeElement!==input && !e.ctrlKey && !e.metaKey && !e.altKey && e.key.length===1){
+    input.focus();
+  }
+});
+</script>
+
 </body>
 </html>

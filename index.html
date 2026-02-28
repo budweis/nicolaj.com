@@ -3,250 +3,597 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>nicolaj nørgaard peulicke - nicolaj.com</title>
+<title>PEULICKE &lt;GO&gt; - nicolaj.com</title>
 <meta name="description" content="nicolaj nørgaard peulicke — senior vice president &amp; cio at energinet.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
+@font-face{
+  font-family:'Bloomberg';
+  src:local('Consolas'),local('SF Mono'),local('Menlo'),local('Monaco'),local('DejaVu Sans Mono');
+}
+
 :root{
-  --text:#171717;
-  --bg:#f8f8f6;
-  --link-hover-bg:#000;
-  --link-hover-fg:#fff;
+  --bb-black:#000000;
+  --bb-dark:#0a0a0a;
+  --bb-panel:#111111;
+  --bb-border:#333333;
+  --bb-orange:#ff8c00;
+  --bb-amber:#ffa500;
+  --bb-yellow:#ffff00;
+  --bb-white:#e8e8e8;
+  --bb-green:#00d26a;
+  --bb-red:#ff3333;
+  --bb-blue:#4488ff;
+  --bb-gray:#666666;
+  --bb-dimgray:#444444;
 }
 
 html,body{
   min-height:100vh;
-  font-family:'Geist Mono',ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
+  font-family:'Bloomberg',Consolas,'SF Mono',Menlo,Monaco,'DejaVu Sans Mono',monospace;
   font-size:13px;
-  line-height:1.65;
-  color:var(--text);
-  background:var(--bg);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-
-/* noise texture overlay — replicating million.dev grain */
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.45;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat:repeat;
-  background-size:180px 180px;
-}
-
-main{
-  position:relative;
-  z-index:1;
-  max-width:70ch;
-  padding:3rem 1.5rem 6rem;
+  line-height:1.5;
+  color:var(--bb-white);
+  background:var(--bb-black);
+  -webkit-font-smoothing:none;
+  -moz-osx-font-smoothing:unset;
 }
 
 ::selection{
-  background:#000;
-  color:#fff;
+  background:var(--bb-orange);
+  color:var(--bb-black);
 }
 
-a{
-  color:var(--text);
-  text-decoration:underline;
-  text-underline-offset:2px;
-  transition:background .12s,color .12s;
-  -webkit-tap-highlight-color:transparent;
+/* ── top bar ── */
+.bb-topbar{
+  background:#1a1a2e;
+  border-bottom:1px solid var(--bb-border);
+  padding:3px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:12px;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
-a:hover{
-  background:var(--link-hover-bg);
-  color:var(--link-hover-fg);
-  text-decoration:none;
+.bb-topbar .bb-logo{
+  color:var(--bb-orange);
+  font-weight:bold;
+  letter-spacing:2px;
 }
 
-a:focus-visible{
-  outline:2px solid #006aff;
-  outline-offset:2px;
+.bb-topbar .bb-page-id{
+  color:var(--bb-yellow);
 }
 
-h1{
+.bb-topbar .bb-time{
+  color:var(--bb-green);
+}
+
+/* ── main container ── */
+.bb-container{
+  max-width:960px;
+  margin:0 auto;
+  padding:0 8px 40px;
+}
+
+/* ── command line ── */
+.bb-cmdline{
+  background:var(--bb-dark);
+  border:1px solid var(--bb-border);
+  padding:4px 10px;
+  margin:8px 0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.bb-cmdline .bb-prompt{
+  color:var(--bb-amber);
+  font-weight:bold;
+}
+
+.bb-cmdline .bb-cmd{
+  color:var(--bb-yellow);
+}
+
+.bb-input{
+  flex:1;
+  background:transparent;
+  border:none;
+  outline:none;
+  color:var(--bb-yellow);
+  font-family:inherit;
   font-size:13px;
-  font-weight:500;
+  caret-color:var(--bb-amber);
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.bb-input::placeholder{
+  color:var(--bb-dimgray);
+  text-transform:uppercase;
+}
+
+.bb-cmdhelp{
+  font-size:11px;
+  color:var(--bb-gray);
+  padding:0 10px 0;
+  margin:-4px 0 4px;
+  display:none;
+}
+
+.bb-cmdhelp.active{
+  display:block;
+}
+
+/* ── header section ── */
+.bb-header{
+  border:1px solid var(--bb-border);
+  background:var(--bb-panel);
+  padding:10px 14px;
+  margin:8px 0;
+}
+
+.bb-header h1{
+  font-size:18px;
+  font-weight:bold;
+  color:var(--bb-orange);
+  text-transform:uppercase;
+  letter-spacing:1px;
   margin-bottom:2px;
 }
 
-.location{
-  color:#737373;
-  font-weight:300;
-  margin-bottom:.8rem;
-}
-
-.menu{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.75rem;
-  margin-bottom:2rem;
-}
-
-.menu a{
-  text-decoration:none;
-  border:1px solid #d4d4d4;
-  border-radius:4px;
-  padding:1px 8px;
-}
-
-.menu a[aria-current="page"]{
-  background:#171717;
-  color:#f8f8f6;
-  border-color:#171717;
-}
-
-h2{
-  font-size:13px;
-  font-weight:500;
-  margin-top:2.2rem;
-  margin-bottom:.35rem;
-}
-
-p,ul{
-  max-width:70ch;
-}
-
-ul{
-  list-style:none;
-  padding:0;
-}
-
-ul li{
-  padding:1px 0;
-}
-
-.role{
-  color:#737373;
-}
-
-.tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:.35rem;
-}
-
-.tags span{
+.bb-header .bb-subtitle{
+  color:var(--bb-gray);
   font-size:12px;
-  padding:2px 8px;
-  border:1px solid #d4d4d4;
-  border-radius:4px;
-  color:#525252;
-  white-space:nowrap;
 }
 
-.links-list a{
-  display:block;
-  width:fit-content;
-  padding:1px 0;
+/* ── navigation ── */
+.bb-nav{
+  display:flex;
+  gap:0;
+  margin:8px 0;
+  border:1px solid var(--bb-border);
+  overflow:hidden;
 }
 
-/* staggered fade-in */
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(-0.4em)}
-  to{opacity:1;transform:translateY(0)}
+.bb-nav a{
+  flex:1;
+  text-align:center;
+  padding:5px 12px;
+  color:var(--bb-white);
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:1px;
+  background:var(--bb-panel);
+  border-right:1px solid var(--bb-border);
+  transition:background .1s,color .1s;
 }
 
-main>*{
-  opacity:0;
-  animation:fadeIn .55s ease both;
+.bb-nav a:last-child{border-right:none}
+
+.bb-nav a:hover{
+  background:var(--bb-orange);
+  color:var(--bb-black);
 }
 
-main>*:nth-child(1){animation-delay:.05s}
-main>*:nth-child(2){animation-delay:.08s}
-main>*:nth-child(3){animation-delay:.14s}
-main>*:nth-child(4){animation-delay:.20s}
-main>*:nth-child(5){animation-delay:.26s}
-main>*:nth-child(6){animation-delay:.32s}
-main>*:nth-child(7){animation-delay:.38s}
-main>*:nth-child(8){animation-delay:.44s}
-main>*:nth-child(9){animation-delay:.50s}
-main>*:nth-child(10){animation-delay:.56s}
-main>*:nth-child(11){animation-delay:.62s}
-main>*:nth-child(12){animation-delay:.68s}
-main>*:nth-child(13){animation-delay:.74s}
-main>*:nth-child(14){animation-delay:.80s}
-main>*:nth-child(15){animation-delay:.86s}
-main>*:nth-child(16){animation-delay:.92s}
-main>*:nth-child(17){animation-delay:.98s}
-main>*:nth-child(18){animation-delay:1.04s}
-main>*:nth-child(19){animation-delay:1.10s}
+.bb-nav a.active{
+  background:var(--bb-orange);
+  color:var(--bb-black);
+  font-weight:bold;
+}
+
+/* ── panels ── */
+.bb-panel{
+  border:1px solid var(--bb-border);
+  background:var(--bb-panel);
+  margin:8px 0;
+}
+
+.bb-panel-header{
+  background:#1a1a2e;
+  padding:4px 10px;
+  border-bottom:1px solid var(--bb-border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.bb-panel-header .bb-section-num{
+  color:var(--bb-yellow);
+  font-weight:bold;
+  font-size:12px;
+}
+
+.bb-panel-header .bb-section-title{
+  color:var(--bb-orange);
+  font-weight:bold;
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+.bb-panel-body{
+  padding:8px 12px;
+}
+
+.bb-panel-body p{
+  color:var(--bb-white);
+  font-size:13px;
+  line-height:1.6;
+  max-width:none;
+}
+
+/* ── data rows ── */
+.bb-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding:2px 0;
+  border-bottom:1px solid #1a1a1a;
+}
+
+.bb-row:last-child{border-bottom:none}
+
+.bb-row .bb-label{
+  color:var(--bb-white);
+}
+
+.bb-row .bb-value{
+  color:var(--bb-amber);
+  text-align:right;
+}
+
+.bb-row a{
+  color:var(--bb-yellow);
+  text-decoration:none;
+}
+
+.bb-row a:hover{
+  color:var(--bb-black);
+  background:var(--bb-yellow);
+}
+
+.bb-role{
+  color:var(--bb-gray);
+  font-size:12px;
+}
+
+/* ── grid layout ── */
+.bb-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin:8px 0;
+}
+
+@media(max-width:640px){
+  .bb-grid{grid-template-columns:1fr}
+}
+
+/* ── principles list ── */
+.bb-principles li{
+  padding:3px 0;
+  border-bottom:1px solid #1a1a1a;
+  list-style:none;
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+}
+
+.bb-principles li:last-child{border-bottom:none}
+
+.bb-principles .bb-bullet{
+  color:var(--bb-green);
+  font-weight:bold;
+  flex-shrink:0;
+}
+
+.bb-principles .bb-text{
+  color:var(--bb-white);
+}
+
+/* ── links ── */
+.bb-links a{
+  display:inline-block;
+  color:var(--bb-yellow);
+  text-decoration:none;
+  padding:3px 12px;
+  border:1px solid var(--bb-border);
+  margin:3px 4px 3px 0;
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:1px;
+  transition:all .1s;
+}
+
+.bb-links a:hover{
+  background:var(--bb-yellow);
+  color:var(--bb-black);
+  border-color:var(--bb-yellow);
+}
+
+/* ── function keys bar ── */
+.bb-fkeys{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#1a1a2e;
+  border-top:1px solid var(--bb-border);
+  display:flex;
+  justify-content:center;
+  padding:0;
+  z-index:100;
+}
+
+.bb-fkey{
+  display:flex;
+  align-items:stretch;
+  border-right:1px solid var(--bb-border);
+}
+
+.bb-fkey:last-child{border-right:none}
+
+.bb-fkey .bb-fkey-num{
+  background:var(--bb-dimgray);
+  color:var(--bb-white);
+  font-size:10px;
+  padding:3px 4px;
+  font-weight:bold;
+}
+
+.bb-fkey .bb-fkey-label{
+  color:var(--bb-amber);
+  font-size:10px;
+  padding:3px 8px;
+}
+
+/* ── separator line ── */
+.bb-separator{
+  border:none;
+  border-top:1px solid var(--bb-border);
+  margin:4px 0;
+}
+
+/* ── scrollbar styling ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bb-black)}
+::-webkit-scrollbar-thumb{background:var(--bb-border)}
+::-webkit-scrollbar-thumb:hover{background:var(--bb-gray)}
+
+/* ── scanline effect ── */
+body::after{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9999;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+}
 </style>
 </head>
 <body>
-<main>
 
-<h1>nicolaj nørgaard peulicke</h1>
-<p class="location">denmark</p>
-
-<nav class="menu" aria-label="site">
-  <a href="index.html" aria-current="page">home</a>
-  <a href="reading-list.html">reading list</a>
-  <a href="bookmarks.html">bookmarks</a>
-</nav>
-
-<h2>today:</h2>
-<p>senior vice president &amp; cio at <a href="https://energinet.dk" target="_blank" rel="noopener">energinet</a>. working with strategy, innovation, pretotyping, prototyping &amp; intrapreneurship with a highly diverse and skilled team born with an entrepreneurial mindset.</p>
-
-<p style="margin-top:.6rem">also an active board member in both startups and grownups.</p>
-
-<h2>background</h2>
-<p>born and raised in denmark. studied political science and e-business at <a href="https://www.aau.dk" target="_blank" rel="noopener">aalborg university</a> and the <a href="https://itu.dk" target="_blank" rel="noopener">it university of copenhagen</a>. after leaving itu, joined the corporate communication team at <a href="https://siemens.com" target="_blank" rel="noopener">siemens denmark</a> and started a consulting business with clients in the healthcare sector. since 2003, working with market development, information management &amp; change management in the energy and financial sector.</p>
-
-
-<h2>current boards</h2>
-<ul>
-  <li><a href="https://energinet.dk" target="_blank" rel="noopener">datahub a/s</a>, <span class="role">board member</span></li>
-  <li><a href="https://nordicrcc.net" target="_blank" rel="noopener">nordic rcc a/s</a>, <span class="role">board member</span></li>
-  <li><a href="https://energinet.dk" target="_blank" rel="noopener">eltransmission a/s</a>, <span class="role">board member</span></li>
-  <li><a href="https://en.wikipedia.org/wiki/Lindoe_Offshore_Renewables_Center" target="_blank" rel="noopener">lindoe offshore renewable center</a>, <span class="role">board member</span></li>
- 
-  
-</ul>
-
-<h2>education</h2>
-<ul>
-  <li><a href="https://cbs.dk" target="_blank" rel="noopener">copenhagen business school</a>, <span class="role">cbs executive board education, 2020</span></li>
-  <li><a href="https://au.dk" target="_blank" rel="noopener">aarhus university</a>, <span class="role">executive mba in change management, 2009</span></li>
-  <li><a href="https://itu.dk" target="_blank" rel="noopener">it university of copenhagen</a>, <span class="role">e-business</span></li>
-  <li><a href="https://aau.dk" target="_blank" rel="noopener">aalborg university</a>, <span class="role">political science</span></li>
-</ul>
-
-
-
-
-<h2>principles</h2>
-<ul>
-  <li>show up prepared, leave with actions</li>
-  <li>build bridges, not empires</li>
-  <li>prototype the argument</li>
-  <li>consistency compounds</li>
-  <li>technology is never the answer — but it's usually part of it</li>
-  <li>it's a marathon, not a sprint — but sprint when it counts</li>
-  <li>a lot of things matter a little</li>
-  <li>a few things matter a lot</li>
-</ul>
-
-<h2>family</h2>
-<p>happiest spending time with wife cathrine, daughters agnes &amp; ida margrethe, and sons david &amp; johannes.</p>
-
-<h2>links</h2>
-<div class="links-list">
-  <a href="https://x.com/nicolaj_com" target="_blank" rel="noopener">twitter</a>
-  <a href="https://dk.linkedin.com/in/nicolaj" target="_blank" rel="noopener">linkedin</a>
-  <a href="mailto:post@nicolaj.com">email</a>
+<!-- top bar -->
+<div class="bb-topbar">
+  <span class="bb-logo">NICOLAJ</span>
+  <span class="bb-page-id">PEULICKE &lt;GOVT&gt;</span>
+  <span class="bb-time" id="bb-clock"></span>
 </div>
 
-</main>
+<div class="bb-container">
+
+<!-- command line -->
+<div class="bb-cmdline" id="bb-cmdline">
+  <span class="bb-prompt">HOME</span>
+  <input type="text" id="bb-input" class="bb-input" spellcheck="false" autocomplete="off" autofocus placeholder="TYPE COMMAND &lt;GO&gt;">
+</div>
+<div class="bb-cmdhelp" id="bb-cmdhelp"></div>
+
+<!-- header -->
+<div class="bb-header">
+  <h1>Nicolaj N&oslash;rgaard Peulicke</h1>
+  <span class="bb-subtitle">DENMARK &nbsp;|&nbsp; SVP &amp; CIO &nbsp;|&nbsp; ENERGINET</span>
+</div>
+
+<!-- nav -->
+<nav class="bb-nav" aria-label="site">
+  <a href="index.html" class="active">1) HOME</a>
+  <a href="reading-list.html">2) READING LIST</a>
+  <a href="bookmarks.html">3) BOOKMARKS</a>
+</nav>
+
+<!-- today panel -->
+<div class="bb-panel">
+  <div class="bb-panel-header">
+    <span class="bb-section-num">1)</span>
+    <span class="bb-section-title">Current Position</span>
+  </div>
+  <div class="bb-panel-body">
+    <p>Senior Vice President &amp; CIO at <a href="https://energinet.dk" target="_blank" rel="noopener" style="color:var(--bb-yellow);text-decoration:none">ENERGINET</a>. Working with strategy, innovation, pretotyping, prototyping &amp; intrapreneurship with a highly diverse and skilled team born with an entrepreneurial mindset.</p>
+    <p style="margin-top:6px;color:var(--bb-amber)">Also an active board member in both startups and grownups.</p>
+  </div>
+</div>
+
+<!-- grid: boards + education -->
+<div class="bb-grid">
+
+  <div class="bb-panel">
+    <div class="bb-panel-header">
+      <span class="bb-section-num">2)</span>
+      <span class="bb-section-title">Current Boards</span>
+    </div>
+    <div class="bb-panel-body">
+      <div class="bb-row"><a href="https://energinet.dk" target="_blank" rel="noopener" class="bb-label">DATAHUB A/S</a><span class="bb-value bb-role">Board Member</span></div>
+      <div class="bb-row"><a href="https://nordicrcc.net" target="_blank" rel="noopener" class="bb-label">NORDIC RCC A/S</a><span class="bb-value bb-role">Board Member</span></div>
+      <div class="bb-row"><a href="https://energinet.dk" target="_blank" rel="noopener" class="bb-label">ELTRANSMISSION A/S</a><span class="bb-value bb-role">Board Member</span></div>
+      <div class="bb-row"><a href="https://en.wikipedia.org/wiki/Lindoe_Offshore_Renewables_Center" target="_blank" rel="noopener" class="bb-label">LINDOE OFFSHORE RENEWABLE CTR</a><span class="bb-value bb-role">Board Member</span></div>
+    </div>
+  </div>
+
+  <div class="bb-panel">
+    <div class="bb-panel-header">
+      <span class="bb-section-num">3)</span>
+      <span class="bb-section-title">Education</span>
+    </div>
+    <div class="bb-panel-body">
+      <div class="bb-row"><a href="https://cbs.dk" target="_blank" rel="noopener" class="bb-label">CBS</a><span class="bb-value bb-role">Exec Board Education</span></div>
+      <div class="bb-row"><a href="https://au.dk" target="_blank" rel="noopener" class="bb-label">AARHUS UNIV</a><span class="bb-value bb-role">EMBA Change Mgmt</span></div>
+      <div class="bb-row"><a href="https://itu.dk" target="_blank" rel="noopener" class="bb-label">ITU CPH</a><span class="bb-value bb-role">E-Business</span></div>
+      <div class="bb-row"><a href="https://aau.dk" target="_blank" rel="noopener" class="bb-label">AALBORG UNIV</a><span class="bb-value bb-role">Political Science</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- background panel -->
+<div class="bb-panel">
+  <div class="bb-panel-header">
+    <span class="bb-section-num">4)</span>
+    <span class="bb-section-title">Background</span>
+  </div>
+  <div class="bb-panel-body">
+    <p>Born and raised in Denmark. Studied political science and e-business at <a href="https://www.aau.dk" target="_blank" rel="noopener" style="color:var(--bb-yellow);text-decoration:none">AALBORG UNIVERSITY</a> and the <a href="https://itu.dk" target="_blank" rel="noopener" style="color:var(--bb-yellow);text-decoration:none">IT UNIVERSITY OF COPENHAGEN</a>. After leaving ITU, joined the corporate communication team at <a href="https://siemens.com" target="_blank" rel="noopener" style="color:var(--bb-yellow);text-decoration:none">SIEMENS DENMARK</a> and started a consulting business with clients in the healthcare sector. Since 2003, working with market development, information management, digitalization &amp; change management in the energy and financial sector.</p>
+  </div>
+</div>
+
+<!-- principles -->
+<div class="bb-panel">
+  <div class="bb-panel-header">
+    <span class="bb-section-num">5)</span>
+    <span class="bb-section-title">Principles</span>
+  </div>
+  <div class="bb-panel-body">
+    <ul class="bb-principles">
+      <li><span class="bb-bullet">&#9654;</span><span class="bb-text">Show up prepared, leave with actions</span></li>
+      <li><span class="bb-bullet">&#9654;</span><span class="bb-text">Build bridges, not empires</span></li>
+      <li><span class="bb-bullet">&#9654;</span><span class="bb-text">Prototype the argument</span></li>
+      <li><span class="bb-bullet">&#9654;</span><span class="bb-text">Consistency compounds</span></li>
+      <li><span class="bb-bullet">&#9654;</span><span class="bb-text">Technology is never the answer &mdash; but it's usually part of it</span></li>
+      <li><span class="bb-bullet">&#9654;</span><span class="bb-text">It's a marathon, not a sprint &mdash; but sprint when it counts</span></li>
+      <li><span class="bb-bullet">&#9654;</span><span class="bb-text">A lot of things matter a little</span></li>
+      <li><span class="bb-bullet">&#9654;</span><span class="bb-text">A few things matter a lot</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- family + links grid -->
+<div class="bb-grid">
+
+  <div class="bb-panel">
+    <div class="bb-panel-header">
+      <span class="bb-section-num">6)</span>
+      <span class="bb-section-title">Family</span>
+    </div>
+    <div class="bb-panel-body">
+      <p>Happiest spending time with wife Cathrine, daughters Agnes &amp; Ida Margrethe, and sons David &amp; Johannes.</p>
+    </div>
+  </div>
+
+  <div class="bb-panel">
+    <div class="bb-panel-header">
+      <span class="bb-section-num">7)</span>
+      <span class="bb-section-title">Links</span>
+    </div>
+    <div class="bb-panel-body bb-links">
+      <a href="https://x.com/nicolaj_com" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://dk.linkedin.com/in/nicolaj" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:post@nicolaj.com">Email</a>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- end container -->
+
+<!-- function keys -->
+<div class="bb-fkeys">
+  <div class="bb-fkey"><span class="bb-fkey-num">F1</span><span class="bb-fkey-label">HELP</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F2</span><span class="bb-fkey-label">HOME</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F3</span><span class="bb-fkey-label">READING</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F4</span><span class="bb-fkey-label">BOOKMARKS</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F5</span><span class="bb-fkey-label">BOARDS</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F6</span><span class="bb-fkey-label">EDUCATION</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F7</span><span class="bb-fkey-label">BIO</span></div>
+  <div class="bb-fkey"><span class="bb-fkey-num">F8</span><span class="bb-fkey-label">CONTACT</span></div>
+</div>
+
+<script>
+// live clock
+function updateClock(){
+  const now=new Date();
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  const s=String(now.getSeconds()).padStart(2,'0');
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const d=String(now.getDate()).padStart(2,'0');
+  const mon=months[now.getMonth()];
+  const y=now.getFullYear();
+  document.getElementById('bb-clock').textContent=d+' '+mon+' '+y+'  '+h+':'+m+':'+s;
+}
+updateClock();
+setInterval(updateClock,1000);
+
+// command line
+const routes={
+  'home':'index.html','1':'index.html',
+  'reading':'reading-list.html','reading list':'reading-list.html','2':'reading-list.html',
+  'bookmarks':'bookmarks.html','3':'bookmarks.html'
+};
+const input=document.getElementById('bb-input');
+const help=document.getElementById('bb-cmdhelp');
+
+input.addEventListener('input',function(){
+  const v=this.value.replace(/<go>/gi,'').trim().toLowerCase();
+  if(v.length>0){
+    const matches=Object.keys(routes).filter(k=>k.startsWith(v));
+    if(matches.length>0){
+      help.textContent='COMMANDS: '+matches.map(m=>m.toUpperCase()+' <GO>').join(' | ');
+      help.classList.add('active');
+    }else{
+      help.textContent='UNKNOWN COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';
+      help.classList.add('active');
+    }
+  }else{
+    help.classList.remove('active');
+  }
+});
+
+input.addEventListener('keydown',function(e){
+  if(e.key==='Enter'){
+    const v=this.value.replace(/<go>/gi,'').trim().toLowerCase();
+    const dest=routes[v];
+    if(dest){window.location.href=dest}
+    else{
+      help.textContent='INVALID COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';
+      help.classList.add('active');
+      this.value='';
+    }
+  }
+});
+
+// click anywhere on cmdline focuses input
+document.getElementById('bb-cmdline').addEventListener('click',function(){input.focus()});
+
+// global keyboard: any key focuses input (unless already in input or modifier key)
+document.addEventListener('keydown',function(e){
+  if(document.activeElement!==input && !e.ctrlKey && !e.metaKey && !e.altKey && e.key.length===1){
+    input.focus();
+  }
+});
+</script>
+
 </body>
 </html>
