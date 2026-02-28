@@ -128,11 +128,6 @@ html,body{
 .bb-rating-4{color:var(--bb-amber)}
 .bb-rating-3{color:var(--bb-gray)}
 
-.bb-fkeys{position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;border-top:1px solid var(--bb-border);display:flex;justify-content:center;padding:0;z-index:100}
-.bb-fkey{display:flex;align-items:stretch;border-right:1px solid var(--bb-border)}
-.bb-fkey:last-child{border-right:none}
-.bb-fkey .bb-fkey-num{background:var(--bb-dimgray);color:var(--bb-white);font-size:10px;padding:3px 4px;font-weight:bold}
-.bb-fkey .bb-fkey-label{color:var(--bb-amber);font-size:10px;padding:3px 8px}
 
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px)}
 
@@ -319,16 +314,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 
 </div>
 
-<div class="bb-fkeys">
-  <div class="bb-fkey"><span class="bb-fkey-num">F1</span><span class="bb-fkey-label">HELP</span></div>
-  <div class="bb-fkey"><span class="bb-fkey-num">F2</span><span class="bb-fkey-label">HOME</span></div>
-  <div class="bb-fkey"><span class="bb-fkey-num">F3</span><span class="bb-fkey-label">READING</span></div>
-  <div class="bb-fkey"><span class="bb-fkey-num">F4</span><span class="bb-fkey-label">BOOKMARKS</span></div>
-  <div class="bb-fkey"><span class="bb-fkey-num">F5</span><span class="bb-fkey-label">5-STAR</span></div>
-  <div class="bb-fkey"><span class="bb-fkey-num">F6</span><span class="bb-fkey-label">4-STAR</span></div>
-  <div class="bb-fkey"><span class="bb-fkey-num">F7</span><span class="bb-fkey-label">3-STAR</span></div>
-  <div class="bb-fkey"><span class="bb-fkey-num">F8</span><span class="bb-fkey-label">SEARCH</span></div>
-</div>
 
 <script>
 function updateClock(){
