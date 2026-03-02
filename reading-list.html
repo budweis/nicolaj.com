@@ -5,136 +5,61 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>READING &lt;GO&gt; - nicolaj.com</title>
 <meta name="description" content="audible library rated list.">
+<link rel="dns-prefetch" href="https://www.amazon.com">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-
-:root{
-  --bb-black:#000000;
-  --bb-dark:#0a0a0a;
-  --bb-panel:#111111;
-  --bb-border:#333333;
-  --bb-orange:#ff8c00;
-  --bb-amber:#ffa500;
-  --bb-yellow:#ffff00;
-  --bb-white:#e8e8e8;
-  --bb-green:#00d26a;
-  --bb-red:#ff3333;
-  --bb-blue:#4488ff;
-  --bb-gray:#666666;
-  --bb-dimgray:#444444;
-}
-
-html,body{
-  min-height:100vh;
-  font-family:Consolas,'SF Mono',Menlo,Monaco,'DejaVu Sans Mono',monospace;
-  font-size:13px;
-  line-height:1.5;
-  color:var(--bb-white);
-  background:var(--bb-black);
-  -webkit-font-smoothing:none;
-}
-
+:root{--bb-black:#000;--bb-dark:#0a0a0a;--bb-panel:#111;--bb-border:#333;--bb-orange:#ff8c00;--bb-amber:#ffa500;--bb-yellow:#ff0;--bb-white:#e8e8e8;--bb-green:#00d26a;--bb-red:#f33;--bb-blue:#48f;--bb-gray:#666;--bb-dimgray:#444}
+html,body{min-height:100vh;font-family:Consolas,'SF Mono',Menlo,Monaco,'DejaVu Sans Mono',monospace;font-size:13px;line-height:1.5;color:var(--bb-white);background:var(--bb-black);-webkit-font-smoothing:none}
 ::selection{background:var(--bb-orange);color:var(--bb-black)}
-
-.bb-topbar{
-  background:#1a1a2e;
-  border-bottom:1px solid var(--bb-border);
-  padding:3px 12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:12px;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
+.bb-topbar{background:#1a1a2e;border-bottom:1px solid var(--bb-border);padding:3px 12px;display:flex;justify-content:space-between;align-items:center;font-size:12px;position:sticky;top:0;z-index:100}
 .bb-topbar .bb-logo{color:var(--bb-orange);font-weight:bold;letter-spacing:2px}
 .bb-topbar .bb-page-id{color:var(--bb-yellow)}
 .bb-topbar .bb-time{color:var(--bb-green)}
-
 .bb-container{max-width:960px;margin:0 auto;padding:0 8px 40px}
-
-.bb-cmdline{
-  background:var(--bb-dark);
-  border:1px solid var(--bb-border);
-  padding:4px 10px;
-  margin:8px 0;
-  display:flex;align-items:center;gap:8px;
-}
+.bb-cmdline{background:var(--bb-dark);border:1px solid var(--bb-border);padding:4px 10px;margin:8px 0;display:flex;align-items:center;gap:8px}
 .bb-cmdline .bb-prompt{color:var(--bb-amber);font-weight:bold}
-.bb-cmdline .bb-cmd{color:var(--bb-yellow)}
 .bb-input{flex:1;background:transparent;border:none;outline:none;color:var(--bb-yellow);font-family:inherit;font-size:13px;caret-color:var(--bb-amber);text-transform:uppercase;letter-spacing:1px}
 .bb-input::placeholder{color:var(--bb-dimgray);text-transform:uppercase}
-.bb-cmdhelp{font-size:11px;color:var(--bb-gray);padding:0 10px 0;margin:-4px 0 4px;display:none}
+.bb-cmdhelp{font-size:11px;color:var(--bb-gray);padding:0 10px;margin:-4px 0 4px;display:none}
 .bb-cmdhelp.active{display:block}
-
 .bb-header{border:1px solid var(--bb-border);background:var(--bb-panel);padding:10px 14px;margin:8px 0}
 .bb-header h1{font-size:18px;font-weight:bold;color:var(--bb-orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
 .bb-header .bb-subtitle{color:var(--bb-gray);font-size:12px}
-
 .bb-nav{display:flex;gap:0;margin:8px 0;border:1px solid var(--bb-border);overflow:hidden}
 .bb-nav a{flex:1;text-align:center;padding:5px 12px;color:var(--bb-white);text-decoration:none;text-transform:uppercase;font-size:11px;letter-spacing:1px;background:var(--bb-panel);border-right:1px solid var(--bb-border);transition:background .1s,color .1s}
 .bb-nav a:last-child{border-right:none}
 .bb-nav a:hover{background:var(--bb-orange);color:var(--bb-black)}
 .bb-nav a.active{background:var(--bb-orange);color:var(--bb-black);font-weight:bold}
-
-.bb-panel{border:1px solid var(--bb-border);background:var(--bb-panel);margin:8px 0}
+.bb-panel{border:1px solid var(--bb-border);background:var(--bb-panel);margin:8px 0;contain:content}
 .bb-panel-header{background:#1a1a2e;padding:4px 10px;border-bottom:1px solid var(--bb-border);display:flex;justify-content:space-between;align-items:center}
 .bb-panel-header .bb-section-num{color:var(--bb-yellow);font-weight:bold;font-size:12px}
 .bb-panel-header .bb-section-title{color:var(--bb-orange);font-weight:bold;text-transform:uppercase;font-size:12px;letter-spacing:1px}
 .bb-panel-header .bb-count{color:var(--bb-green);font-size:11px}
 .bb-panel-body{padding:8px 12px}
-
-.bb-book-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  padding:2px 0;
-  border-bottom:1px solid #1a1a1a;
-  gap:12px;
-}
+.bb-book-row{display:flex;justify-content:space-between;align-items:baseline;padding:2px 0;border-bottom:1px solid #1a1a1a;gap:12px}
 .bb-book-row:last-child{border-bottom:none}
-
-.bb-book-row a{
-  color:var(--bb-white);
-  text-decoration:none;
-  flex:1;
-  min-width:0;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
+.bb-book-row a{color:var(--bb-white);text-decoration:none;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bb-book-row a:hover{color:var(--bb-black);background:var(--bb-yellow)}
-
-.bb-book-row .bb-author{
-  color:var(--bb-gray);
-  font-size:12px;
-  flex-shrink:0;
-  text-align:right;
-  max-width:200px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.bb-book-row .bb-rating{
-  flex-shrink:0;
-  font-size:12px;
-  text-align:right;
-  min-width:50px;
-}
-
+.bb-book-row .bb-author{color:var(--bb-gray);font-size:12px;flex-shrink:0;text-align:right;max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bb-book-row .bb-rating{flex-shrink:0;font-size:12px;text-align:right;min-width:50px}
 .bb-rating-5{color:var(--bb-green)}
 .bb-rating-4{color:var(--bb-amber)}
 .bb-rating-3{color:var(--bb-gray)}
-
-
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px)}
-
+.bb-lazy{content-visibility:auto;contain-intrinsic-size:auto 500px}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:var(--bb-black)}
 ::-webkit-scrollbar-thumb{background:var(--bb-border)}
 ::-webkit-scrollbar-thumb:hover{background:var(--bb-gray)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);will-change:transform}
+@media(max-width:640px){
+html,body{font-size:14px}
+.bb-topbar{padding:6px 12px}
+.bb-nav a{padding:10px 6px;font-size:10px;letter-spacing:0}
+.bb-header h1{font-size:16px}
+.bb-book-row{padding:6px 0}
+.bb-book-row .bb-author{display:none}
+.bb-book-row a{white-space:normal}
+}
 </style>
 </head>
 <body>
@@ -196,7 +121,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 </div>
 
 <!-- 4 stars -->
-<div class="bb-panel">
+<div class="bb-panel bb-lazy">
   <div class="bb-panel-header">
     <span class="bb-section-num">2)</span>
     <span class="bb-section-title">Very Strong</span>
@@ -247,7 +172,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 </div>
 
 <!-- 3 stars -->
-<div class="bb-panel">
+<div class="bb-panel bb-lazy">
   <div class="bb-panel-header">
     <span class="bb-section-num">3)</span>
     <span class="bb-section-title">Good / Interest-Dependent</span>
@@ -314,66 +239,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 
 </div>
 
-
 <script>
-function updateClock(){
-  const now=new Date();
-  const h=String(now.getHours()).padStart(2,'0');
-  const m=String(now.getMinutes()).padStart(2,'0');
-  const s=String(now.getSeconds()).padStart(2,'0');
-  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const d=String(now.getDate()).padStart(2,'0');
-  const mon=months[now.getMonth()];
-  const y=now.getFullYear();
-  document.getElementById('bb-clock').textContent=d+' '+mon+' '+y+'  '+h+':'+m+':'+s;
-}
-updateClock();
-setInterval(updateClock,1000);
-
-const routes={
-  'home':'index.html','1':'index.html',
-  'reading':'reading-list.html','reading list':'reading-list.html','2':'reading-list.html',
-  'bookmarks':'bookmarks.html','3':'bookmarks.html'
-};
-const input=document.getElementById('bb-input');
-const help=document.getElementById('bb-cmdhelp');
-
-input.addEventListener('input',function(){
-  const v=this.value.replace(/<go>/gi,'').trim().toLowerCase();
-  if(v.length>0){
-    const matches=Object.keys(routes).filter(k=>k.startsWith(v));
-    if(matches.length>0){
-      help.textContent='COMMANDS: '+matches.map(m=>m.toUpperCase()+' <GO>').join(' | ');
-      help.classList.add('active');
-    }else{
-      help.textContent='UNKNOWN COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';
-      help.classList.add('active');
-    }
-  }else{
-    help.classList.remove('active');
-  }
-});
-
-input.addEventListener('keydown',function(e){
-  if(e.key==='Enter'){
-    const v=this.value.replace(/<go>/gi,'').trim().toLowerCase();
-    const dest=routes[v];
-    if(dest){window.location.href=dest}
-    else{
-      help.textContent='INVALID COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';
-      help.classList.add('active');
-      this.value='';
-    }
-  }
-});
-
-document.getElementById('bb-cmdline').addEventListener('click',function(){input.focus()});
-document.addEventListener('keydown',function(e){
-  if(document.activeElement!==input && !e.ctrlKey && !e.metaKey && !e.altKey && e.key.length===1){
-    input.focus();
-  }
-});
+(function(){var e=document.getElementById('bb-clock'),M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];function t(){var n=new Date();e.textContent=String(n.getDate()).padStart(2,'0')+' '+M[n.getMonth()]+' '+n.getFullYear()+'  '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0')}t();setInterval(t,1000)})();
+(function(){var r={'home':'index.html','1':'index.html','reading':'reading-list.html','reading list':'reading-list.html','2':'reading-list.html','bookmarks':'bookmarks.html','3':'bookmarks.html'},k=Object.keys(r),i=document.getElementById('bb-input'),h=document.getElementById('bb-cmdhelp');i.addEventListener('input',function(){var v=this.value.replace(/<go>/gi,'').trim().toLowerCase();if(v.length>0){var m=k.filter(function(x){return x.indexOf(v)===0});if(m.length>0){h.textContent='COMMANDS: '+m.map(function(x){return x.toUpperCase()+' <GO>'}).join(' | ');h.classList.add('active')}else{h.textContent='UNKNOWN COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';h.classList.add('active')}}else{h.classList.remove('active')}});i.addEventListener('keydown',function(e){if(e.key==='Enter'){var v=this.value.replace(/<go>/gi,'').trim().toLowerCase(),d=r[v];if(d){window.location.href=d}else{h.textContent='INVALID COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';h.classList.add('active');this.value=''}}});document.getElementById('bb-cmdline').addEventListener('click',function(){i.focus()});document.addEventListener('keydown',function(e){if(document.activeElement!==i&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&e.key.length===1){i.focus()}})})();
 </script>
-
 </body>
 </html>

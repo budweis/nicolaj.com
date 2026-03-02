@@ -5,353 +5,72 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PEULICKE &lt;GO&gt; - nicolaj.com</title>
 <meta name="description" content="nicolaj nørgaard peulicke — senior vice president &amp; cio at energinet.">
+<link rel="dns-prefetch" href="https://energinet.dk">
+<link rel="dns-prefetch" href="https://dk.linkedin.com">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-
-@font-face{
-  font-family:'Bloomberg';
-  src:local('Consolas'),local('SF Mono'),local('Menlo'),local('Monaco'),local('DejaVu Sans Mono');
-}
-
-:root{
-  --bb-black:#000000;
-  --bb-dark:#0a0a0a;
-  --bb-panel:#111111;
-  --bb-border:#333333;
-  --bb-orange:#ff8c00;
-  --bb-amber:#ffa500;
-  --bb-yellow:#ffff00;
-  --bb-white:#e8e8e8;
-  --bb-green:#00d26a;
-  --bb-red:#ff3333;
-  --bb-blue:#4488ff;
-  --bb-gray:#666666;
-  --bb-dimgray:#444444;
-}
-
-html,body{
-  min-height:100vh;
-  font-family:'Bloomberg',Consolas,'SF Mono',Menlo,Monaco,'DejaVu Sans Mono',monospace;
-  font-size:13px;
-  line-height:1.5;
-  color:var(--bb-white);
-  background:var(--bb-black);
-  -webkit-font-smoothing:none;
-  -moz-osx-font-smoothing:unset;
-}
-
-::selection{
-  background:var(--bb-orange);
-  color:var(--bb-black);
-}
-
-/* ── top bar ── */
-.bb-topbar{
-  background:#1a1a2e;
-  border-bottom:1px solid var(--bb-border);
-  padding:3px 12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:12px;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-
-.bb-topbar .bb-logo{
-  color:var(--bb-orange);
-  font-weight:bold;
-  letter-spacing:2px;
-}
-
-.bb-topbar .bb-page-id{
-  color:var(--bb-yellow);
-}
-
-.bb-topbar .bb-time{
-  color:var(--bb-green);
-}
-
-/* ── main container ── */
-.bb-container{
-  max-width:960px;
-  margin:0 auto;
-  padding:0 8px 40px;
-}
-
-/* ── command line ── */
-.bb-cmdline{
-  background:var(--bb-dark);
-  border:1px solid var(--bb-border);
-  padding:4px 10px;
-  margin:8px 0;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.bb-cmdline .bb-prompt{
-  color:var(--bb-amber);
-  font-weight:bold;
-}
-
-.bb-cmdline .bb-cmd{
-  color:var(--bb-yellow);
-}
-
-.bb-input{
-  flex:1;
-  background:transparent;
-  border:none;
-  outline:none;
-  color:var(--bb-yellow);
-  font-family:inherit;
-  font-size:13px;
-  caret-color:var(--bb-amber);
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-.bb-input::placeholder{
-  color:var(--bb-dimgray);
-  text-transform:uppercase;
-}
-
-.bb-cmdhelp{
-  font-size:11px;
-  color:var(--bb-gray);
-  padding:0 10px 0;
-  margin:-4px 0 4px;
-  display:none;
-}
-
-.bb-cmdhelp.active{
-  display:block;
-}
-
-/* ── header section ── */
-.bb-header{
-  border:1px solid var(--bb-border);
-  background:var(--bb-panel);
-  padding:10px 14px;
-  margin:8px 0;
-}
-
-.bb-header h1{
-  font-size:18px;
-  font-weight:bold;
-  color:var(--bb-orange);
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:2px;
-}
-
-.bb-header .bb-subtitle{
-  color:var(--bb-gray);
-  font-size:12px;
-}
-
-/* ── navigation ── */
-.bb-nav{
-  display:flex;
-  gap:0;
-  margin:8px 0;
-  border:1px solid var(--bb-border);
-  overflow:hidden;
-}
-
-.bb-nav a{
-  flex:1;
-  text-align:center;
-  padding:5px 12px;
-  color:var(--bb-white);
-  text-decoration:none;
-  text-transform:uppercase;
-  font-size:11px;
-  letter-spacing:1px;
-  background:var(--bb-panel);
-  border-right:1px solid var(--bb-border);
-  transition:background .1s,color .1s;
-}
-
+:root{--bb-black:#000;--bb-dark:#0a0a0a;--bb-panel:#111;--bb-border:#333;--bb-orange:#ff8c00;--bb-amber:#ffa500;--bb-yellow:#ff0;--bb-white:#e8e8e8;--bb-green:#00d26a;--bb-red:#f33;--bb-blue:#48f;--bb-gray:#666;--bb-dimgray:#444}
+html,body{min-height:100vh;font-family:Consolas,'SF Mono',Menlo,Monaco,'DejaVu Sans Mono',monospace;font-size:13px;line-height:1.5;color:var(--bb-white);background:var(--bb-black);-webkit-font-smoothing:none;-moz-osx-font-smoothing:unset}
+::selection{background:var(--bb-orange);color:var(--bb-black)}
+.bb-topbar{background:#1a1a2e;border-bottom:1px solid var(--bb-border);padding:3px 12px;display:flex;justify-content:space-between;align-items:center;font-size:12px;position:sticky;top:0;z-index:100}
+.bb-topbar .bb-logo{color:var(--bb-orange);font-weight:bold;letter-spacing:2px}
+.bb-topbar .bb-page-id{color:var(--bb-yellow)}
+.bb-topbar .bb-time{color:var(--bb-green)}
+.bb-container{max-width:960px;margin:0 auto;padding:0 8px 40px}
+.bb-cmdline{background:var(--bb-dark);border:1px solid var(--bb-border);padding:4px 10px;margin:8px 0;display:flex;align-items:center;gap:8px}
+.bb-cmdline .bb-prompt{color:var(--bb-amber);font-weight:bold}
+.bb-input{flex:1;background:transparent;border:none;outline:none;color:var(--bb-yellow);font-family:inherit;font-size:13px;caret-color:var(--bb-amber);text-transform:uppercase;letter-spacing:1px}
+.bb-input::placeholder{color:var(--bb-dimgray);text-transform:uppercase}
+.bb-cmdhelp{font-size:11px;color:var(--bb-gray);padding:0 10px;margin:-4px 0 4px;display:none}
+.bb-cmdhelp.active{display:block}
+.bb-header{border:1px solid var(--bb-border);background:var(--bb-panel);padding:10px 14px;margin:8px 0}
+.bb-header h1{font-size:18px;font-weight:bold;color:var(--bb-orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.bb-header .bb-subtitle{color:var(--bb-gray);font-size:12px}
+.bb-nav{display:flex;gap:0;margin:8px 0;border:1px solid var(--bb-border);overflow:hidden}
+.bb-nav a{flex:1;text-align:center;padding:5px 12px;color:var(--bb-white);text-decoration:none;text-transform:uppercase;font-size:11px;letter-spacing:1px;background:var(--bb-panel);border-right:1px solid var(--bb-border);transition:background .1s,color .1s}
 .bb-nav a:last-child{border-right:none}
-
-.bb-nav a:hover{
-  background:var(--bb-orange);
-  color:var(--bb-black);
-}
-
-.bb-nav a.active{
-  background:var(--bb-orange);
-  color:var(--bb-black);
-  font-weight:bold;
-}
-
-/* ── panels ── */
-.bb-panel{
-  border:1px solid var(--bb-border);
-  background:var(--bb-panel);
-  margin:8px 0;
-}
-
-.bb-panel-header{
-  background:#1a1a2e;
-  padding:4px 10px;
-  border-bottom:1px solid var(--bb-border);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.bb-panel-header .bb-section-num{
-  color:var(--bb-yellow);
-  font-weight:bold;
-  font-size:12px;
-}
-
-.bb-panel-header .bb-section-title{
-  color:var(--bb-orange);
-  font-weight:bold;
-  text-transform:uppercase;
-  font-size:12px;
-  letter-spacing:1px;
-}
-
-.bb-panel-body{
-  padding:8px 12px;
-}
-
-.bb-panel-body p{
-  color:var(--bb-white);
-  font-size:13px;
-  line-height:1.6;
-  max-width:none;
-}
-
-/* ── data rows ── */
-.bb-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  padding:2px 0;
-  border-bottom:1px solid #1a1a1a;
-}
-
+.bb-nav a:hover{background:var(--bb-orange);color:var(--bb-black)}
+.bb-nav a.active{background:var(--bb-orange);color:var(--bb-black);font-weight:bold}
+.bb-panel{border:1px solid var(--bb-border);background:var(--bb-panel);margin:8px 0;contain:content}
+.bb-panel-header{background:#1a1a2e;padding:4px 10px;border-bottom:1px solid var(--bb-border);display:flex;justify-content:space-between;align-items:center}
+.bb-panel-header .bb-section-num{color:var(--bb-yellow);font-weight:bold;font-size:12px}
+.bb-panel-header .bb-section-title{color:var(--bb-orange);font-weight:bold;text-transform:uppercase;font-size:12px;letter-spacing:1px}
+.bb-panel-body{padding:8px 12px}
+.bb-panel-body p{color:var(--bb-white);font-size:13px;line-height:1.6}
+.bb-row{display:flex;justify-content:space-between;align-items:baseline;padding:2px 0;border-bottom:1px solid #1a1a1a}
 .bb-row:last-child{border-bottom:none}
-
-.bb-row .bb-label{
-  color:var(--bb-white);
-}
-
-.bb-row .bb-value{
-  color:var(--bb-amber);
-  text-align:right;
-}
-
-.bb-row a{
-  color:var(--bb-yellow);
-  text-decoration:none;
-}
-
-.bb-row a:hover{
-  color:var(--bb-black);
-  background:var(--bb-yellow);
-}
-
-.bb-role{
-  color:var(--bb-gray);
-  font-size:12px;
-}
-
-/* ── grid layout ── */
-.bb-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin:8px 0;
-}
-
+.bb-row .bb-label{color:var(--bb-white)}
+.bb-row .bb-value{color:var(--bb-amber);text-align:right}
+.bb-row a{color:var(--bb-yellow);text-decoration:none}
+.bb-row a:hover{color:var(--bb-black);background:var(--bb-yellow)}
+.bb-role{color:var(--bb-gray);font-size:12px}
+.bb-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
 @media(max-width:640px){
-  .bb-grid{grid-template-columns:1fr}
+.bb-grid{grid-template-columns:1fr}
+html,body{font-size:14px}
+.bb-topbar{padding:6px 12px}
+.bb-nav a{padding:10px 6px;font-size:10px;letter-spacing:0}
+.bb-header h1{font-size:16px}
+.bb-row{padding:6px 0}
+.bb-panel-body p{font-size:14px}
+.bb-links a{padding:8px 12px;font-size:12px}
 }
-
-/* ── principles list ── */
-.bb-principles li{
-  padding:3px 0;
-  border-bottom:1px solid #1a1a1a;
-  list-style:none;
-  display:flex;
-  align-items:baseline;
-  gap:8px;
-}
-
+.bb-principles li{padding:3px 0;border-bottom:1px solid #1a1a1a;list-style:none;display:flex;align-items:baseline;gap:8px}
 .bb-principles li:last-child{border-bottom:none}
-
-.bb-principles .bb-bullet{
-  color:var(--bb-green);
-  font-weight:bold;
-  flex-shrink:0;
-}
-
-.bb-principles .bb-text{
-  color:var(--bb-white);
-}
-
-/* ── links ── */
-.bb-links a{
-  display:inline-block;
-  color:var(--bb-yellow);
-  text-decoration:none;
-  padding:3px 12px;
-  border:1px solid var(--bb-border);
-  margin:3px 4px 3px 0;
-  text-transform:uppercase;
-  font-size:11px;
-  letter-spacing:1px;
-  transition:all .1s;
-}
-
-.bb-links a:hover{
-  background:var(--bb-yellow);
-  color:var(--bb-black);
-  border-color:var(--bb-yellow);
-}
-
-
-/* ── separator line ── */
-.bb-separator{
-  border:none;
-  border-top:1px solid var(--bb-border);
-  margin:4px 0;
-}
-
-/* ── scrollbar styling ── */
+.bb-principles .bb-bullet{color:var(--bb-green);font-weight:bold;flex-shrink:0}
+.bb-principles .bb-text{color:var(--bb-white)}
+.bb-links a{display:inline-block;color:var(--bb-yellow);text-decoration:none;padding:3px 12px;border:1px solid var(--bb-border);margin:3px 4px 3px 0;text-transform:uppercase;font-size:11px;letter-spacing:1px;transition:all .1s}
+.bb-links a:hover{background:var(--bb-yellow);color:var(--bb-black);border-color:var(--bb-yellow)}
+.bb-separator{border:none;border-top:1px solid var(--bb-border);margin:4px 0}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:var(--bb-black)}
 ::-webkit-scrollbar-thumb{background:var(--bb-border)}
 ::-webkit-scrollbar-thumb:hover{background:var(--bb-gray)}
-
-/* ── scanline effect ── */
-body::after{
-  content:'';
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:9999;
-  background:repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,0,0,0.03) 2px,
-    rgba(0,0,0,0.03) 4px
-  );
-}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);will-change:transform}
 </style>
 </head>
 <body>
 
-<!-- top bar -->
 <div class="bb-topbar">
   <span class="bb-logo">NICOLAJ</span>
   <span class="bb-page-id">PEULICKE &lt;GOVT&gt;</span>
@@ -360,27 +79,23 @@ body::after{
 
 <div class="bb-container">
 
-<!-- command line -->
 <div class="bb-cmdline" id="bb-cmdline">
   <span class="bb-prompt">HOME</span>
   <input type="text" id="bb-input" class="bb-input" spellcheck="false" autocomplete="off" autofocus placeholder="TYPE COMMAND &lt;GO&gt;">
 </div>
 <div class="bb-cmdhelp" id="bb-cmdhelp"></div>
 
-<!-- header -->
 <div class="bb-header">
   <h1>Nicolaj N&oslash;rgaard Peulicke</h1>
   <span class="bb-subtitle">DENMARK &nbsp;|&nbsp; SVP &amp; CIO &nbsp;|&nbsp; ENERGINET</span>
 </div>
 
-<!-- nav -->
 <nav class="bb-nav" aria-label="site">
   <a href="index.html" class="active">1) HOME</a>
   <a href="reading-list.html">2) READING LIST</a>
   <a href="bookmarks.html">3) BOOKMARKS</a>
 </nav>
 
-<!-- today panel -->
 <div class="bb-panel">
   <div class="bb-panel-header">
     <span class="bb-section-num">1)</span>
@@ -392,9 +107,7 @@ body::after{
   </div>
 </div>
 
-<!-- grid: boards + education -->
 <div class="bb-grid">
-
   <div class="bb-panel">
     <div class="bb-panel-header">
       <span class="bb-section-num">2)</span>
@@ -407,7 +120,6 @@ body::after{
       <div class="bb-row"><a href="https://en.wikipedia.org/wiki/Lindoe_Offshore_Renewables_Center" target="_blank" rel="noopener" class="bb-label">LINDOE OFFSHORE RENEWABLE CTR</a><span class="bb-value bb-role">Board Member</span></div>
     </div>
   </div>
-
   <div class="bb-panel">
     <div class="bb-panel-header">
       <span class="bb-section-num">3)</span>
@@ -420,10 +132,8 @@ body::after{
       <div class="bb-row"><a href="https://aau.dk" target="_blank" rel="noopener" class="bb-label">AALBORG UNIV</a><span class="bb-value bb-role">Political Science</span></div>
     </div>
   </div>
-
 </div>
 
-<!-- background panel -->
 <div class="bb-panel">
   <div class="bb-panel-header">
     <span class="bb-section-num">4)</span>
@@ -434,7 +144,6 @@ body::after{
   </div>
 </div>
 
-<!-- principles -->
 <div class="bb-panel">
   <div class="bb-panel-header">
     <span class="bb-section-num">5)</span>
@@ -454,9 +163,7 @@ body::after{
   </div>
 </div>
 
-<!-- family + links grid -->
 <div class="bb-grid">
-
   <div class="bb-panel">
     <div class="bb-panel-header">
       <span class="bb-section-num">6)</span>
@@ -466,7 +173,6 @@ body::after{
       <p>Happiest spending time with wife Cathrine, daughters Agnes &amp; Ida Margrethe, and sons David &amp; Johannes.</p>
     </div>
   </div>
-
   <div class="bb-panel">
     <div class="bb-panel-header">
       <span class="bb-section-num">7)</span>
@@ -478,76 +184,13 @@ body::after{
       <a href="mailto:post@nicolaj.com">Email</a>
     </div>
   </div>
+</div>
 
 </div>
 
-</div><!-- end container -->
-
-
 <script>
-// live clock
-function updateClock(){
-  const now=new Date();
-  const h=String(now.getHours()).padStart(2,'0');
-  const m=String(now.getMinutes()).padStart(2,'0');
-  const s=String(now.getSeconds()).padStart(2,'0');
-  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const d=String(now.getDate()).padStart(2,'0');
-  const mon=months[now.getMonth()];
-  const y=now.getFullYear();
-  document.getElementById('bb-clock').textContent=d+' '+mon+' '+y+'  '+h+':'+m+':'+s;
-}
-updateClock();
-setInterval(updateClock,1000);
-
-// command line
-const routes={
-  'home':'index.html','1':'index.html',
-  'reading':'reading-list.html','reading list':'reading-list.html','2':'reading-list.html',
-  'bookmarks':'bookmarks.html','3':'bookmarks.html'
-};
-const input=document.getElementById('bb-input');
-const help=document.getElementById('bb-cmdhelp');
-
-input.addEventListener('input',function(){
-  const v=this.value.replace(/<go>/gi,'').trim().toLowerCase();
-  if(v.length>0){
-    const matches=Object.keys(routes).filter(k=>k.startsWith(v));
-    if(matches.length>0){
-      help.textContent='COMMANDS: '+matches.map(m=>m.toUpperCase()+' <GO>').join(' | ');
-      help.classList.add('active');
-    }else{
-      help.textContent='UNKNOWN COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';
-      help.classList.add('active');
-    }
-  }else{
-    help.classList.remove('active');
-  }
-});
-
-input.addEventListener('keydown',function(e){
-  if(e.key==='Enter'){
-    const v=this.value.replace(/<go>/gi,'').trim().toLowerCase();
-    const dest=routes[v];
-    if(dest){window.location.href=dest}
-    else{
-      help.textContent='INVALID COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';
-      help.classList.add('active');
-      this.value='';
-    }
-  }
-});
-
-// click anywhere on cmdline focuses input
-document.getElementById('bb-cmdline').addEventListener('click',function(){input.focus()});
-
-// global keyboard: any key focuses input (unless already in input or modifier key)
-document.addEventListener('keydown',function(e){
-  if(document.activeElement!==input && !e.ctrlKey && !e.metaKey && !e.altKey && e.key.length===1){
-    input.focus();
-  }
-});
+(function(){var e=document.getElementById('bb-clock'),M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];function t(){var n=new Date();e.textContent=String(n.getDate()).padStart(2,'0')+' '+M[n.getMonth()]+' '+n.getFullYear()+'  '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0')}t();setInterval(t,1000)})();
+(function(){var r={'home':'index.html','1':'index.html','reading':'reading-list.html','reading list':'reading-list.html','2':'reading-list.html','bookmarks':'bookmarks.html','3':'bookmarks.html'},k=Object.keys(r),i=document.getElementById('bb-input'),h=document.getElementById('bb-cmdhelp');i.addEventListener('input',function(){var v=this.value.replace(/<go>/gi,'').trim().toLowerCase();if(v.length>0){var m=k.filter(function(x){return x.indexOf(v)===0});if(m.length>0){h.textContent='COMMANDS: '+m.map(function(x){return x.toUpperCase()+' <GO>'}).join(' | ');h.classList.add('active')}else{h.textContent='UNKNOWN COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';h.classList.add('active')}}else{h.classList.remove('active')}});i.addEventListener('keydown',function(e){if(e.key==='Enter'){var v=this.value.replace(/<go>/gi,'').trim().toLowerCase(),d=r[v];if(d){window.location.href=d}else{h.textContent='INVALID COMMAND. TRY: HOME | READING | BOOKMARKS  (or 1 | 2 | 3)';h.classList.add('active');this.value=''}}});document.getElementById('bb-cmdline').addEventListener('click',function(){i.focus()});document.addEventListener('keydown',function(e){if(document.activeElement!==i&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&e.key.length===1){i.focus()}})})();
 </script>
-
 </body>
 </html>
